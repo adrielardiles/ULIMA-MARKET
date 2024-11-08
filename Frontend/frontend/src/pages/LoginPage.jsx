@@ -18,7 +18,7 @@ const LoginPage = () => {
         if (username === "Ulima" && password === "123")
         {
             setError("")
-            navigate("/main")
+            navigate("/")
         }else
         {
             setError("Error Login")

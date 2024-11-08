@@ -5,7 +5,27 @@ import EntradaDatos from "./EntradaDatos";
 const LoginFormulario = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate(); // Hook para la navegación
+    const [name, setName] = useState("");
+    const [errorMessage, setErrorMessage] = useState(""); // Nuevo estado para mensajes de error
+    const navigate = useNavigate();
+
+    const handleButtonClick = () => {
+        if (props.modo === "login") {
+            // Lógica de validación para login
+            if (username && password) {
+                props.loginOnClick(username, password);
+            } else {
+                setErrorMessage("Por favor ingrese un usuario y una contraseña válidos.");
+            }
+        } else {
+            // Modo registro: redirigir al menú principal
+            if (name && username && password) {
+                navigate("/"); // Redirigir al menú principal
+            } else {
+                setErrorMessage("Por favor complete todos los campos.");
+            }
+        }
+    };
 
     return (
         <>
@@ -13,6 +33,15 @@ const LoginFormulario = (props) => {
                 {props.modo === "login" ? "Iniciar Sesión" : "Crear nueva cuenta"}
             </h1>
             <form>
+                {props.modo !== "login" && (
+                    <EntradaDatos
+                        key={"input_name"}
+                        label="Nombre de usuario:"
+                        tipo="entrada"
+                        valor={name}
+                        setValor={setName}
+                    />
+                )}
                 <EntradaDatos
                     key={"input_username"}
                     label="Correo electrónico: "
@@ -31,13 +60,16 @@ const LoginFormulario = (props) => {
                     <button
                         type="button"
                         className="btn btn-danger"
-                        onClick={() => {
-                            props.loginOnClick(username, password);
-                        }}
+                        onClick={handleButtonClick}
                     >
                         {props.modo === "login" ? "Acceder" : "Guardar"}
                     </button>
                 </div>
+                {errorMessage && (
+                    <div className="alert alert-danger mt-3 text-center" role="alert">
+                        {errorMessage}
+                    </div>
+                )}
             </form>
             <div className="text-center mt-3">
                 {props.modo === "login" ? (

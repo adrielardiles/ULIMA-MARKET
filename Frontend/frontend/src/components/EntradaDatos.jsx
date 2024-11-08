@@ -1,18 +1,34 @@
-const EntradaDatos = (props) => {
+import React from 'react';
+
+const EntradaDatos = ({ label, tipo, valor, setValor, placeholder, id, isPassword, required }) => {
     const valueOnChange = (evt) => {
-        props.setValor(evt.target.value)
-    }
+        setValor(evt.target.value);
+    };
 
-    return <div className="mb-3">
-        <label htmlFor="txt_value" className="form-label">
-            { props.label }
-        </label>
-        <input
-            type={ props.tipo === "entrada" ? "text" : "password" } 
-            className="form-control"
-            onChange={ valueOnChange }
-            value={ props.valor }/>
-    </div>
-}
+    return (
+        <div className="mb-3">
+            <label htmlFor={id} className="form-label">
+                {label}
+            </label>
+            <input
+                type={isPassword ? "password" : tipo} // Soporta diferentes tipos
+                className="form-control"
+                id={id}
+                placeholder={placeholder}
+                onChange={valueOnChange}
+                value={valor}
+                required={required}
+            />
+        </div>
+    );
+};
 
-export default EntradaDatos
+EntradaDatos.defaultProps = {
+    tipo: "text", // Valor predeterminado de tipo si no se proporciona
+    placeholder: "",
+    id: "txt_value", // ID predeterminado si no se proporciona
+    isPassword: false,
+    required: false,
+};
+
+export default EntradaDatos;
