@@ -3,7 +3,7 @@ import React from 'react';
 const SeccionAtencionCliente = ({ opciones, navigate }) => {
   return (
     <div className="atencion-cliente">
-      <h6>ATENCIÓN AL CLIENTE</h6>
+      <h6 style={{ color: '#CE4500' }}>ATENCIÓN AL CLIENTE</h6>
       {opciones.map((opcion, index) => (
         <p
           key={index}

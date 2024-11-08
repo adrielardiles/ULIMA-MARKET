@@ -3,7 +3,7 @@ import React from 'react';
 const SeccionPoliticas = ({ politicas, navigate }) => {
   return (
     <div className="politicas-uso">
-      <h6>POLÍTICAS DE USO</h6>
+      <h6 style={{ color: '#CE4500' }}>POLÍTICAS DE USO</h6>
       {politicas.map((politica, index) => (
         <p
           key={index}

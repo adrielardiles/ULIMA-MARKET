@@ -3,7 +3,7 @@ import React from 'react';
 const SeccionContacto = ({ datos }) => {
   return (
     <div className="contacto">
-      <h6>CONTÁCTANOS</h6>
+      <h6 style={{ color: '#CE4500' }}>CONTÁCTANOS</h6>
       <p>
         <a href={`tel:${datos.telefono}`} className="text-dark">
           {datos.telefono}

@@ -8,7 +8,6 @@ import SeccionPoliticas from './SeccionPoliticas';
 const Footer = () => {
   const navigate = useNavigate();
 
-  // Datos que se pasan a las secciones
   const datosContacto = {
     telefono: '(01) 613 9999',
     correo: 'soporte@ulimarket.com',
@@ -25,13 +24,12 @@ const Footer = () => {
   ];
 
   return (
-    <div className="footer bg-light mt-5 p-5">
+    <div className="footer mt-5 p-5" style={{ backgroundColor: '#f8e8cb' }}>
       <div className="container">
         <div className="row">
           <div className="col-md-3 mb-3">
             <div className="logo-section">
-              <h5>ULIMARKET</h5>
-              {/* Aquí puedes añadir el logo si es necesario */}
+              <h5 style={{ color: '#CE4500' }}>ULIMARKET</h5>
             </div>
           </div>
           <div className="col-md-3 mb-3">
