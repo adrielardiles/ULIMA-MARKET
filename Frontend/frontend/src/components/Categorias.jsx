@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import CategoriasBar from './CategoriaBar';
 import CategoriasMenu from './CategoriaMenu';
 
-
 const Categorias = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Datos simulados de categorías
-  const categorias = ['Electrónica', 'Ropa', 'Hogar', 'Deportes'];
+  // Nuevas categorías relacionadas con un supermercado
+  const categorias = ['Frutas y Verduras', 'Carnes y Aves', 'Lácteos y Huevos', 'Bebidas', 'Snacks y Dulces'];
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
