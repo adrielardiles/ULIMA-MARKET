@@ -24,13 +24,16 @@ const Footer = () => {
   ];
 
   return (
-    <div className="footer mt-5 p-5" style={{ backgroundColor: '#f8e8cb' }}>
+    <div className="footer mt-5 pt-5 pb-2" style={{ backgroundColor: '#f8e8cb' }}>
       <div className="container">
         <div className="row">
-          <div className="col-md-3 mb-3">
-            <div className="logo-section">
-              <h5 style={{ color: '#CE4500' }}>ULIMARKET</h5>
-            </div>
+          <div
+            className="col-md-3 mb-3 d-flex align-items-center"
+            style={{ cursor: 'pointer' }}
+            onClick={() => navigate('/')}
+          >
+            <img src={`${process.env.PUBLIC_URL}/imagenes/shopcar.png`} alt="Carrito" style={{ width: '40px', height: '40px', marginRight: '10px' }} />
+            <h5 style={{ color: '#CE4500' }}>ULIMARKET</h5>
           </div>
           <div className="col-md-3 mb-3">
             <SeccionContacto datos={datosContacto} />
