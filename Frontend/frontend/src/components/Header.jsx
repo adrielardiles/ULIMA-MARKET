@@ -4,24 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import Carrito from './Carrito'; // Supuesto componente Carrito
 import Categorias from './Categorias'; // Supuesto componente Categorias
 import MenuUsuario from './MenuUsuario'; // Supuesto componente MenuUsuario
+import { useAuth } from '../context/AuthContext'; // Importa el hook useAuth
 
 const Header = () => {
   const navigate = useNavigate();
+  const { usuario } = useAuth(); // Usa el hook useAuth para obtener el usuario
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
 
-  // Simulación de categorías disponibles (puedes modificar según tu estructura)
-  const categoriasDisponibles = [
-    { id: 'frutas-verduras', nombre: 'Frutas y Verduras' },
-    { id: 'carnes-aves', nombre: 'Carnes y Aves' },
-    { id: 'lacteos-huevos', nombre: 'Lácteos y Huevos' },
-    { id: 'bebidas', nombre: 'Bebidas' },
-    { id: 'snacks-dulces', nombre: 'Snacks y Dulces' },
-  ];
-
+  // Función de manejo de búsqueda (tu lógica existente)
   const manejarBusqueda = () => {
-    if (terminoBusqueda.trim() === '') return; // Si la búsqueda está vacía, no hacemos nada
-  
-    // Índice de palabras clave relacionadas con cada categoría
+    if (terminoBusqueda.trim() === '') return;
+
     const categoriasRelacionadas = [
       { id: 'Frutas y Verduras', nombre: 'Frutas y Verduras', palabrasClave: ['manzana', 'banana', 'tomate', 'verdura', 'fruta'] },
       { id: 'Carnes y Aves', nombre: 'Carnes y Aves', palabrasClave: ['pollo', 'res', 'carne', 'ave', 'cerdo'] },
@@ -29,24 +22,27 @@ const Header = () => {
       { id: 'Bebidas', nombre: 'Bebidas', palabrasClave: ['jugo', 'agua', 'refresco', 'bebida'] },
       { id: 'Snacks y Dulces', nombre: 'Snacks y Dulces', palabrasClave: ['chocolate', 'galleta', 'snack', 'dulce'] },
     ];
-  
-    // Encuentra la categoría con la mayor concordancia según el término de búsqueda
+
     const categoriaEncontrada = categoriasRelacionadas.find(categoria =>
       categoria.nombre.toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
       categoria.palabrasClave.some(palabra => palabra.toLowerCase().includes(terminoBusqueda.toLowerCase()))
     );
-  
+
     if (categoriaEncontrada) {
-      // Redirige usando encodeURIComponent para codificar la URL de manera segura
       navigate(`/mostrarTodo/${encodeURIComponent(categoriaEncontrada.id)}`);
     } else {
-      // Redirige a una categoría "No encontrado"
       navigate(`/mostrarTodo/${encodeURIComponent('No Encontrado')}`);
     }
   };
-  
-  
-  
+
+  // Manejo de navegación a pedidos
+  const manejarNavegacionPedidos = () => {
+    if (usuario) {
+      navigate('/pedidos');
+    } else {
+      navigate('/login');
+    }
+  };
 
   return (
     <div>
@@ -96,18 +92,18 @@ const Header = () => {
             <div
               className="mx-3"
               style={{ cursor: 'pointer' }}
-              onClick={() => navigate('/pedidos')}
+              onClick={manejarNavegacionPedidos} // Llama a la función de manejo
             >
               <span role="img" aria-label="Pedidos">📝</span> pedidos
             </div>
 
             {/* Componente Carrito con productos */}
             <div className="mx-3">
-              <Carrito productos={[]} /> {/* Supón que el carrito tiene productos simulados */}
+              <Carrito productos={[]} />
             </div>
 
             {/* Menú de Usuario */}
-            <MenuUsuario usuario={null} /> {/* Cambia el usuario según tu lógica */}
+            <MenuUsuario usuario={usuario} />
           </div>
         </div>
         <Categorias />

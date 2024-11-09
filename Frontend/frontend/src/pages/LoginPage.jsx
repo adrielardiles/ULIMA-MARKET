@@ -1,12 +1,10 @@
 import { useNavigate } from "react-router-dom"
 import "../../node_modules/bootstrap/dist/css/bootstrap.css"
 
-
 import { useState } from "react"
 import LoginFormulario from "../components/LoginForm"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
-
 
 const LoginPage = () => {
     const [error, setError] = useState("")
@@ -14,40 +12,45 @@ const LoginPage = () => {
     const navigate = useNavigate()
 
     const loginHandler = async (username, password) => {
-
-        if (username === "Ulima" && password === "123")
-        {
+        if (username === "Ulima" && password === "123") {
             setError("")
             navigate("/")
-        }else
-        {
+        } else {
             setError("Error Login")
         }
-        
     }
 
-    return  <>
-        <Header/>
-        
-        <div className="row mt-5 mb-5">
-            <div className="col-md-4"></div>
-            <div className="col-md-4">
-                <LoginFormulario
-                    loginOnClick={ loginHandler }
-                    modo={"login"}/>
-                {
-                    (() => {
-                        if (error !== "") {
-                            return <div className="mt-4 alert alert-danger text-center"> Email o Contraseña incorrecta </div>
-                        }
-                    })(error)
-                }
+    return (
+        <>
+            <Header />
+            <div className="row mt-5 mb-5">
+                <div className="col-md-4"></div>
+                <div className="col-md-4">
+                    <LoginFormulario
+                        loginOnClick={loginHandler}
+                        modo={"login"}
+                    />
+                    {error !== "" && (
+                        <div className="mt-4 alert alert-danger text-center">
+                            Email o Contraseña incorrecta
+                        </div>
+                    )}
+                    {/* Enlace para redirigir a la página de registro */}
+                    <div className="text-center mt-3">
+                        <a
+                            href="/register"
+                            className="text-decoration-none text-primary"
+                            style={{ fontSize: '16px' }}
+                        >
+                            ¿Aún no tienes cuenta?
+                        </a>
+                    </div>
+                </div>
+                <div className="col-md-4"></div>
             </div>
-            <div className="col-md-4"></div>
-        </div> 
-
-        <Footer/>
-    </>
+            <Footer />
+        </>
+    )
 }
 
 export default LoginPage

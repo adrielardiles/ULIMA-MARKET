@@ -1,60 +1,141 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ProductoCarrito from './ProductoCarrito'; // Componente para mostrar cada producto
+import { useAuth } from '../context/AuthContext'; // Importar el contexto de autenticación
 
-const Carrito = ({ productos }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Carrito = ({ productosIniciales = [] }) => {
+  const [productos, setProductos] = useState(productosIniciales);
+  const [mostrarCarrito, setMostrarCarrito] = useState(false);
   const navigate = useNavigate();
+  const { usuario } = useAuth(); // Obtener el estado del usuario del contexto de autenticación
 
-  // Calcular el total de productos y el monto total
-  const totalProductos = productos.reduce((acc, producto) => acc + producto.cantidad, 0);
-  const montoTotal = productos.reduce((acc, producto) => acc + producto.precio * producto.cantidad, 0);
+  // Calcular subtotal
+  const subtotal = productos.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
 
-  const toggleCarrito = () => {
-    setIsOpen(!isOpen);
+  // Manejar eliminación de un producto individual
+  const eliminarProducto = (id) => {
+    setProductos(productos.filter(producto => producto.id !== id));
+  };
+
+  // Manejar eliminación de todos los productos
+  const eliminarTodosLosProductos = () => {
+    setProductos([]);
+  };
+
+  // Manejar la finalización del pedido
+  const manejarFinalizarPedido = () => {
+    setMostrarCarrito(false);
+    if (!usuario) {
+      // Si no hay usuario autenticado, redirige a /login
+      navigate('/login');
+    } else {
+      // Si hay usuario autenticado, redirige a /pagarTotal
+      navigate('/pagarTotal');
+    }
   };
 
   return (
-    <div>
-      <div onClick={toggleCarrito} style={{ cursor: 'pointer' }}>
-        <span role="img" aria-label="Carrito">🛒</span> Carrito ({totalProductos})
+    <>
+      {/* Botón para mostrar el carrito */}
+      <div style={{ cursor: 'pointer' }} onClick={() => setMostrarCarrito(true)}>
+        🛒 Carrito ({productos.length})
       </div>
-      {isOpen && (
-        <div className="mt-3">
-          <table className="table table-bordered">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio Unitario</th>
-                <th>Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-              {productos.map((producto, index) => (
-                <tr key={index}>
-                  <td>{producto.nombre}</td>
-                  <td>{producto.cantidad}</td>
-                  <td>${producto.precio.toFixed(2)}</td>
-                  <td>${(producto.precio * producto.cantidad).toFixed(2)}</td>
-                </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colSpan="3" className="text-right font-weight-bold">Total</td>
-                <td>${montoTotal.toFixed(2)}</td>
-              </tr>
-            </tfoot>
-          </table>
+
+      {/* Barra lateral de carrito */}
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          right: mostrarCarrito ? 0 : '-100%',
+          width: '300px',
+          height: '100%',
+          backgroundColor: '#fff',
+          boxShadow: '-2px 0 5px rgba(0,0,0,0.3)',
+          transition: 'right 0.3s ease',
+          zIndex: 1000,
+          padding: '20px',
+          overflowY: 'auto'
+        }}
+      >
+        {/* Botón de cerrar */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h4>Productos Agregados</h4>
           <button
-            className="btn btn-primary mt-2"
-            onClick={() => navigate('/PagoPage')}
+            style={{
+              background: 'none',
+              border: 'none',
+              fontSize: '20px',
+              cursor: 'pointer'
+            }}
+            onClick={() => setMostrarCarrito(false)}
           >
-            Pagar
+            &times;
           </button>
         </div>
-      )}
-    </div>
+
+        <hr />
+
+        {/* Productos en el carrito */}
+        {productos.length === 0 ? (
+          <p>No hay productos en el carrito.</p>
+        ) : (
+          productos.map((producto) => (
+            <ProductoCarrito
+              key={producto.id}
+              producto={producto}
+              eliminarProducto={eliminarProducto}
+            />
+          ))
+        )}
+
+        <hr />
+
+        {/* Botón para eliminar todos los productos */}
+        {productos.length > 0 && (
+          <button
+            style={{
+              background: 'red',
+              color: '#fff',
+              border: 'none',
+              padding: '10px',
+              cursor: 'pointer',
+              width: '100%',
+              marginBottom: '10px',
+              borderRadius: '5px'
+            }}
+            onClick={eliminarTodosLosProductos}
+          >
+            Eliminar Todos
+          </button>
+        )}
+
+        {/* Subtotal y botón para finalizar el pedido */}
+        <div>
+          <p style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>Subtotal:</span>
+            <span>S/ {subtotal.toFixed(2)}</span>
+          </p>
+          <p style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>Total:</span>
+            <span>S/ {subtotal.toFixed(2)}</span>
+          </p>
+          <button
+            style={{
+              background: '#28a745',
+              color: '#fff',
+              border: 'none',
+              padding: '10px 20px',
+              cursor: 'pointer',
+              width: '100%',
+              borderRadius: '5px'
+            }}
+            onClick={manejarFinalizarPedido}
+          >
+            Finalizar Pedido
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 

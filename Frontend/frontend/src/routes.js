@@ -12,6 +12,7 @@ import RecuperarCuenta from './pages/RecuperarCuenta';
 import ProductoPage from './pages/ProductoPage';
 import VerTodosPage from './pages/VerTodosPage';
 import LandingPage from './pages/LadingPage';
+import PagarTotal from './pages/PagarTotal';
 
 const router = createBrowserRouter([
     { path: "/", element: <LandingPage /> },
@@ -25,7 +26,8 @@ const router = createBrowserRouter([
     { path: "/login", element: <LoginPage /> },
     { path: "/recuperar-contraseña", element: <RecuperarCuenta /> },
     { path: "/producto/:productId", element: <ProductoPage /> },
-    { path: "/mostrarTodo/:categoriaId", element: <VerTodosPage /> } // Nueva ruta
+    { path: "/mostrarTodo/:categoriaId", element: <VerTodosPage /> },
+    { path: "/pagarTotal", element: <PagarTotal/> }
 ]);
 
 export default router;
