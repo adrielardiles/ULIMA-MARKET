@@ -1,6 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CategoriasMenu = ({ categorias }) => {
+  const navigate = useNavigate();
+
+  const manejarClickCategoria = (categoria) => {
+    navigate(`/mostrarTodo/${encodeURIComponent(categoria)}`);
+  };
+
   return (
     <div
       style={{
@@ -17,7 +24,11 @@ const CategoriasMenu = ({ categorias }) => {
     >
       <ul className="list-unstyled mb-0">
         {categorias.map((categoria, index) => (
-          <li key={index} style={{ padding: '8px 0', cursor: 'pointer' }}>
+          <li
+            key={index}
+            style={{ padding: '8px 0', cursor: 'pointer' }}
+            onClick={() => manejarClickCategoria(categoria)}
+          >
             {categoria}
           </li>
         ))}
