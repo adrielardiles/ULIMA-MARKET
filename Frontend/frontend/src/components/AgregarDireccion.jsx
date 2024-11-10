@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import EntradaDatos from './EntradaDatos'; // Asumo que tienes un componente de entrada reutilizable
+import EntradaDatos from './EntradaDatos';
 
 const AgregarDireccion = ({ agregarDireccion }) => {
     const [pais, setPais] = useState('');
@@ -14,7 +14,6 @@ const AgregarDireccion = ({ agregarDireccion }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         agregarDireccion({ pais, departamento, provincia, distrito, calle, numero, informacionAdicional, destinatario });
-        // Resetear campos después de agregar
         setPais('');
         setDepartamento('');
         setProvincia('');
@@ -25,7 +24,7 @@ const AgregarDireccion = ({ agregarDireccion }) => {
         setDestinatario('');
     };
 
-    return (
+    return <>
         <form onSubmit={handleSubmit} className="mb-4">
             <div className="row">
                 <div className="col-md-6">
@@ -43,7 +42,7 @@ const AgregarDireccion = ({ agregarDireccion }) => {
             </div>
             <button type="submit" className="btn btn-warning mt-3">Guardar</button>
         </form>
-    );
+    </>
 };
 
 export default AgregarDireccion;

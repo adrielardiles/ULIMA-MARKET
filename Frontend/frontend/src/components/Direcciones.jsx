@@ -3,7 +3,7 @@ import AgregarDireccion from './AgregarDireccion';
 import VerDirecciones from './VerDirecciones';
 
 const Direcciones = () => {
-    // Simulación de datos obtenidos desde el backend
+
     const direccionesSimuladas = [
         {
             id: 1,
@@ -30,20 +30,20 @@ const Direcciones = () => {
     ];
 
     const [direcciones, setDirecciones] = useState(direccionesSimuladas);
-    const [mostrarAgregar, setMostrarAgregar] = useState(false); // Cambiado a false
-    const [mostrarVer, setMostrarVer] = useState(true); // Cambiado a true
+    const [mostrarAgregar, setMostrarAgregar] = useState(false);
+    const [mostrarVer, setMostrarVer] = useState(true); 
 
-    // Función para agregar una nueva dirección
+
     const agregarDireccion = (nuevaDireccion) => {
         setDirecciones([...direcciones, { ...nuevaDireccion, id: direcciones.length + 1 }]);
     };
 
-    // Función para eliminar una dirección
+
     const eliminarDireccion = (id) => {
         setDirecciones(direcciones.filter((direccion) => direccion.id !== id));
     };
 
-    return (
+    return <>
         <div className="container">
             <div className="d-flex justify-content-between mb-4">
                 <button className={`btn ${mostrarAgregar ? 'btn-warning' : 'btn-light'}`} onClick={() => { setMostrarAgregar(true); setMostrarVer(false); }}>
@@ -56,7 +56,7 @@ const Direcciones = () => {
             {mostrarAgregar && <AgregarDireccion agregarDireccion={agregarDireccion} />}
             {mostrarVer && <VerDirecciones direcciones={direcciones} eliminarDireccion={eliminarDireccion} />}
         </div>
-    );
+        </>
 };
 
 export default Direcciones;

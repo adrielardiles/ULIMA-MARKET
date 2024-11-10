@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SeccionAtencionCliente = ({ opciones, navigate }) => {
-  return (
+  return <>
     <div className="atencion-cliente">
       <h6 style={{ color: '#CE4500' }}>ATENCIÓN AL CLIENTE</h6>
       {opciones.map((opcion, index) => (
@@ -15,7 +15,7 @@ const SeccionAtencionCliente = ({ opciones, navigate }) => {
         </p>
       ))}
     </div>
-  );
+  </>
 };
 
 export default SeccionAtencionCliente;

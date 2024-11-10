@@ -6,12 +6,12 @@ const IngresarCodigo = ({ manejarCodigoIngresado, reenviarCodigo }) => {
     const [codigo, setCodigo] = useState("");
     const [correoConfirmado, setCorreoConfirmado] = useState(false);
     const [codigoValido, setCodigoValido] = useState(null);
-    const codigoCorrecto = "1234"; // Código correcto para este ejemplo
+    const codigoCorrecto = "1234"; 
 
     const handleEnviarCodigo = () => {
         if (email) {
             setCorreoConfirmado(true);
-            reenviarCodigo(); // Simulación de enviar código al correo
+            reenviarCodigo(); 
         }
     };
 
@@ -24,7 +24,7 @@ const IngresarCodigo = ({ manejarCodigoIngresado, reenviarCodigo }) => {
         }
     };
 
-    return (
+    return <>
         <div>
             <h1 className="text-center mb-4">Recuperar Contraseña</h1>
             {!correoConfirmado ? (
@@ -82,7 +82,7 @@ const IngresarCodigo = ({ manejarCodigoIngresado, reenviarCodigo }) => {
                 </>
             )}
         </div>
-    );
+    </>
 };
 
 export default IngresarCodigo;

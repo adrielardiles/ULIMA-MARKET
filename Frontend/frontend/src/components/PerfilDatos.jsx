@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import EntradaDatos from './EntradaDatos';
 
 const PerfilDatos = () => {
-    // Datos simulados del cliente (se usarían estos datos como si vinieran del backend)
+
     const datosClientePorDefecto = {
         nombre: "Adriel",
         apellido: "Doe",
@@ -12,22 +12,21 @@ const PerfilDatos = () => {
         telefono: "987654321",
     };
 
-    // Estados para manejar los datos
+
     const [nombre, setNombre] = useState(datosClientePorDefecto.nombre);
     const [apellido, setApellido] = useState(datosClientePorDefecto.apellido);
     const [documento, setDocumento] = useState(datosClientePorDefecto.documento);
     const [genero, setGenero] = useState(datosClientePorDefecto.genero);
     const [fechaNacimiento, setFechaNacimiento] = useState(datosClientePorDefecto.fechaNacimiento);
     const [telefono, setTelefono] = useState(datosClientePorDefecto.telefono);
-    const [editMode, setEditMode] = useState(false); // Estado para controlar el modo de edición
+    const [editMode, setEditMode] = useState(false); 
 
     const handleEditToggle = () => {
-        setEditMode(!editMode); // Cambiar entre modo de edición y modo de visualización
+        setEditMode(!editMode); 
     };
 
     const handleSave = () => {
-        // Lógica para guardar los cambios (ej. enviar datos actualizados al backend)
-        // Aquí puedes implementar la lógica para enviar los datos actualizados cuando integres el backend
+
         console.log({
             nombre,
             apellido,
@@ -36,10 +35,10 @@ const PerfilDatos = () => {
             fechaNacimiento,
             telefono
         });
-        setEditMode(false); // Desactivar el modo de edición después de guardar
+        setEditMode(false);
     };
 
-    return (
+    return <>
         <div className="container border rounded p-4 bg-light">
             <form>
                 <div className="row mb-3">
@@ -51,7 +50,7 @@ const PerfilDatos = () => {
                             setValor={setNombre}
                             placeholder="Ingrese su nombre"
                             id="nombre"
-                            readOnly={!editMode} // Deshabilitar edición si no está en modo de edición
+                            readOnly={!editMode} 
                         />
                     </div>
                     <div className="col-12 col-md-6">
@@ -126,7 +125,7 @@ const PerfilDatos = () => {
                 </div>
             </form>
         </div>
-    );
+    </>
 };
 
 export default PerfilDatos;

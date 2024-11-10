@@ -2,7 +2,7 @@ import React from 'react';
 import FilaHorario from './FilaHorario';
 
 const TablaHorario = ({ datosHorario }) => {
-  return (
+  return <>
     <table className="table table-bordered text-center">
       <thead className="thead-light">
         <tr>
@@ -17,7 +17,7 @@ const TablaHorario = ({ datosHorario }) => {
         ))}
       </tbody>
     </table>
-  );
+  </>
 };
 
 export default TablaHorario;

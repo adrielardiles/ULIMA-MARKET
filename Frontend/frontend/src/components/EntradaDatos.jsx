@@ -5,7 +5,7 @@ const EntradaDatos = ({ label, tipo, valor, setValor, placeholder, id, isPasswor
         setValor(evt.target.value);
     };
 
-    return (
+    return <>
         <div className="mb-3">
             <label htmlFor={id} className="form-label">
                 {label}
@@ -20,13 +20,13 @@ const EntradaDatos = ({ label, tipo, valor, setValor, placeholder, id, isPasswor
                 required={required}
             />
         </div>
-    );
+        </>
 };
 
 EntradaDatos.defaultProps = {
-    tipo: "text", // Valor predeterminado de tipo si no se proporciona
+    tipo: "text", 
     placeholder: "",
-    id: "txt_value", // ID predeterminado si no se proporciona
+    id: "txt_value", 
     isPassword: false,
     required: false,
 };

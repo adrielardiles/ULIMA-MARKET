@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ProductoResumido from './ProductoResumido';
 import BannerPromocion from './BannerPromocion';
-import CarouselControls from './CarouselControls';
-import CarouselContent from './CarouselContent';
+import CarrucelControles from './CarrucelControles';
+import ContenidoCarrusel from './ContenidoCarrusel';
 
 const CategoriaCarrusel = ({ productos }) => {
-  // Get unique categories
-  const categorias = [...new Set(productos.map(producto => producto.categoria))];
 
-  // State for managing active group index for each category
+  const categorias = [...new Set(productos.map(producto => producto.categoria))];
   const [grupoActivoPorCategoria, setGrupoActivoPorCategoria] = useState({});
 
-  // Function to divide products into groups of 3 items
+
   const dividirEnGrupos = (productos, cantidadPorGrupo = 3) => {
     const grupos = [];
     for (let i = 0; i < productos.length; i += cantidadPorGrupo) {
@@ -21,7 +19,7 @@ const CategoriaCarrusel = ({ productos }) => {
     return grupos;
   };
 
-  // Handle the "next" button
+
   const manejarSiguiente = (categoria, totalGrupos) => {
     setGrupoActivoPorCategoria(prev => ({
       ...prev,
@@ -29,7 +27,7 @@ const CategoriaCarrusel = ({ productos }) => {
     }));
   };
 
-  // Handle the "previous" button
+
   const manejarAnterior = (categoria, totalGrupos) => {
     setGrupoActivoPorCategoria(prev => ({
       ...prev,
@@ -39,9 +37,7 @@ const CategoriaCarrusel = ({ productos }) => {
     }));
   };
 
-  const navigate = useNavigate();
-
-  return (
+  return <>
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
       {categorias.map((categoria, index) => {
         const productosPorCategoria = productos.filter(producto => producto.categoria === categoria);
@@ -51,28 +47,20 @@ const CategoriaCarrusel = ({ productos }) => {
         return (
           <div key={index} className="categoria-carrusel my-4">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h3 style={{ textAlign: 'left' }}>{categoria}</h3>
-              <Link
-                to={`/mostrarTodo/${categoria}`}
-                style={{ color: 'orange', textDecoration: 'underline' }}
-              >
+              <h3>{categoria}</h3>
+              <Link to={`/mostrarTodo/${encodeURIComponent(categoria)}`} style={{ color: 'orange', textDecoration: 'underline' }}>
                 Ver Todos
               </Link>
             </div>
-            <div
-              onClick={() => navigate(`/mostrarTodo/${categoria}`)}
-              style={{ cursor: 'pointer' }}
-            >
-              <BannerPromocion categoriaId={categoria.toLowerCase().replace(/\s/g, '')} />
-            </div>
+            <BannerPromocion categoriaId={categoria.toLowerCase().replace(/\s/g, '')} />
             <div className="carousel" style={{ margin: '0 auto', padding: '20px 0', position: 'relative' }}>
-              <CarouselContent grupos={grupos} grupoActivo={grupoActivo}>
+              <ContenidoCarrusel grupos={grupos} grupoActivo={grupoActivo}>
                 {grupos[grupoActivo].map(producto => (
-                  <ProductoResumido key={producto.id} producto={producto} productos={productos} />
+                  <ProductoResumido key={producto.id} producto={producto} />
                 ))}
-              </CarouselContent>
+              </ContenidoCarrusel>
               {grupos.length > 1 && (
-                <CarouselControls
+                <CarrucelControles
                   onSiguiente={() => manejarSiguiente(categoria, grupos.length)}
                   onAnterior={() => manejarAnterior(categoria, grupos.length)}
                 />
@@ -82,7 +70,7 @@ const CategoriaCarrusel = ({ productos }) => {
         );
       })}
     </div>
-  );
+    </>
 };
 
 export default CategoriaCarrusel;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const VerDetallesPopup = ({ titulo, campos, cerrarPopup }) => {
-  return (
+  return <>
     <div
       style={{
         position: 'fixed',
@@ -46,7 +46,7 @@ const VerDetallesPopup = ({ titulo, campos, cerrarPopup }) => {
         ))}
       </div>
     </div>
-  );
+  </>
 };
 
 export default VerDetallesPopup;

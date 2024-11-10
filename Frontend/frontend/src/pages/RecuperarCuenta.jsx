@@ -7,7 +7,7 @@ import CambiarContrasena from "../components/CambiarContrasena";
 
 const RecuperarCuenta = () => {
     const [etapa, setEtapa] = useState("ingresarCodigo");
-    const [codigoCorrecto, setCodigoCorrecto] = useState("1234"); // Código simulado
+    const [codigoCorrecto, setCodigoCorrecto] = useState("1234"); 
     const [codigoIngresado, setCodigoIngresado] = useState("");
     const [mostrarModal, setMostrarModal] = useState(false);
     const [mensajeModal, setMensajeModal] = useState("");
@@ -28,10 +28,10 @@ const RecuperarCuenta = () => {
         setMostrarModal(true);
         setTimeout(() => {
             navigate("/");
-        }, 1000); // Navegar al menú principal después de un breve retardo
+        }, 1000); 
     };
 
-    return (
+    return <>
         <div className="container mt-5">
             {etapa === "ingresarCodigo" ? (
                 <IngresarCodigo
@@ -45,7 +45,7 @@ const RecuperarCuenta = () => {
                 <CambiarContrasena manejarContrasenaCambiada={manejarContrasenaCambiada} />
             )}
 
-            {/* Modal de Bootstrap */}
+
             <Modal show={mostrarModal} onHide={() => setMostrarModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Mensaje</Modal.Title>
@@ -58,7 +58,7 @@ const RecuperarCuenta = () => {
                 </Modal.Footer>
             </Modal>
         </div>
-    );
+    </>
 };
 
 export default RecuperarCuenta;

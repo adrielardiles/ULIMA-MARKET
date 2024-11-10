@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const PedidoItem = ({ pedido }) => {
     const [mostrar, setMostrar] = useState(false);
@@ -11,7 +11,7 @@ const PedidoItem = ({ pedido }) => {
         setEstaCancelado(true);
     };
 
-    return (
+    return <>
         <div
             className={`card mb-3 ${estaCancelado ? 'bg-light text-muted' : ''}`}
             style={{ width: '18rem' }}
@@ -24,7 +24,7 @@ const PedidoItem = ({ pedido }) => {
                 </button>
             </div>
 
-            {/* Modal para mostrar detalles del pedido */}
+
             <Modal show={mostrar} onHide={manejarCerrar}>
                 <Modal.Header closeButton>
                     <Modal.Title>Pedido - {pedido.fecha}</Modal.Title>
@@ -53,7 +53,7 @@ const PedidoItem = ({ pedido }) => {
                         <button
                             className="btn btn-outline-danger"
                             onClick={manejarCancelar}
-                            disabled={estaCancelado} // Deshabilitar el botón si el pedido está cancelado
+                            disabled={estaCancelado} 
                         >
                             Cancelar Pedido
                         </button>
@@ -61,14 +61,13 @@ const PedidoItem = ({ pedido }) => {
                 </Modal.Body>
             </Modal>
 
-            {/* Leyenda para pedidos cancelados */}
             {estaCancelado && (
                 <p className="text-center text-muted mt-2">
                     Este pedido ha sido cancelado.
                 </p>
             )}
         </div>
-    );
+    </>
 };
 
 export default PedidoItem;

@@ -8,7 +8,7 @@ const CategoriasMenu = ({ categorias }) => {
     navigate(`/mostrarTodo/${encodeURIComponent(categoria)}`);
   };
 
-  return (
+  return <>
     <div
       style={{
         position: 'absolute',
@@ -22,7 +22,7 @@ const CategoriasMenu = ({ categorias }) => {
         zIndex: 1,
       }}
     >
-      <ul className="list-unstyled mb-0">
+      <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
         {categorias.map((categoria, index) => (
           <li
             key={index}
@@ -34,7 +34,7 @@ const CategoriasMenu = ({ categorias }) => {
         ))}
       </ul>
     </div>
-  );
+    </>
 };
 
 export default CategoriasMenu;

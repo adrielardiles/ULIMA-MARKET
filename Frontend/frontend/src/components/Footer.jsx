@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom'; // Asumiendo que usas React Router para navegación
+import { useNavigate } from 'react-router-dom';
 import SeccionContacto from './SeccionContacto';
 import SeccionAtencionCliente from './SeccionAtencion';
 import SeccionPoliticas from './SeccionPoliticas';
@@ -23,7 +23,7 @@ const Footer = () => {
     { texto: 'Política de Datos Personales', ruta: '/datos-personales' },
   ];
 
-  return (
+  return <>
     <div className="footer mt-5 pt-5 pb-2" style={{ backgroundColor: '#f8e8cb' }}>
       <div className="container">
         <div className="row">
@@ -47,7 +47,7 @@ const Footer = () => {
         </div>
       </div>
     </div>
-  );
+    </>
 };
 
 export default Footer;

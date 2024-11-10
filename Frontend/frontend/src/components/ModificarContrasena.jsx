@@ -6,12 +6,11 @@ const ModificarContrasena = ({ contrasena, actualizarContrasena }) => {
     const manejarEnvio = (e) => {
         e.preventDefault();
         const nuevaContrasena = e.target.nuevaContrasena.value;
-        // Aquí puedes agregar validaciones
         actualizarContrasena(nuevaContrasena);
         setMostrarFormulario(false);
     };
 
-    return (
+    return <>
         <div className="card mb-4">
             <div className="card-body">
                 <h5 className="card-title">Contraseña</h5>
@@ -40,7 +39,7 @@ const ModificarContrasena = ({ contrasena, actualizarContrasena }) => {
                 )}
             </div>
         </div>
-    );
+    </>
 };
 
 export default ModificarContrasena;

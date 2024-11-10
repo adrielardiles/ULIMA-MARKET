@@ -6,28 +6,27 @@ const LoginFormulario = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
-    const [errorMessage, setErrorMessage] = useState(""); // Nuevo estado para mensajes de error
+    const [errorMessage, setErrorMessage] = useState(""); 
     const navigate = useNavigate();
 
     const handleButtonClick = () => {
         if (props.modo === "login") {
-            // Lógica de validación para login
             if (username && password) {
                 props.loginOnClick(username, password);
             } else {
                 setErrorMessage("Por favor ingrese un usuario y una contraseña válidos.");
             }
         } else {
-            // Modo registro: redirigir al menú principal
+  
             if (name && username && password) {
-                navigate("/"); // Redirigir al menú principal
+                navigate("/"); 
             } else {
                 setErrorMessage("Por favor complete todos los campos.");
             }
         }
     };
 
-    return (
+    return <>
         <>
             <h1 className="text-center mt-5 mb-3">
                 {props.modo === "login" ? "Iniciar Sesión" : "Crear nueva cuenta"}
@@ -91,7 +90,7 @@ const LoginFormulario = (props) => {
                 )}
             </div>
         </>
-    );
+    </>
 };
 
 export default LoginFormulario;

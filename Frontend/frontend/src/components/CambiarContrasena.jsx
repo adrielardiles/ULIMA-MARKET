@@ -4,16 +4,24 @@ import EntradaDatos from "./EntradaDatos";
 const CambiarContrasena = ({ manejarContrasenaCambiada }) => {
     const [nuevaContrasena, setNuevaContrasena] = useState("");
     const [confirmarContrasena, setConfirmarContrasena] = useState("");
+    const [mensajeError, setMensajeError] = useState("");
 
     const manejarCambioContrasena = () => {
+        if (nuevaContrasena.length < 6) {
+            setMensajeError("La contraseña debe tener al menos 6 caracteres.");
+            return;
+        }
         if (nuevaContrasena === confirmarContrasena) {
             manejarContrasenaCambiada();
+            setNuevaContrasena("");
+            setConfirmarContrasena("");
+            setMensajeError(""); // Limpia cualquier mensaje de error existente
         } else {
-            manejarContrasenaCambiada("Las contraseñas no coinciden.");
+            setMensajeError("Las contraseñas no coinciden.");
         }
     };
 
-    return (
+    return <>
         <div>
             <h1 className="text-center mb-4">Cambiar Contraseña</h1>
             <EntradaDatos
@@ -30,6 +38,9 @@ const CambiarContrasena = ({ manejarContrasenaCambiada }) => {
                 valor={confirmarContrasena}
                 setValor={setConfirmarContrasena}
             />
+            {mensajeError && (
+                <p className="text-danger text-center mt-3">{mensajeError}</p>
+            )}
             <div className="text-center mt-4">
                 <button
                     type="button"
@@ -41,7 +52,7 @@ const CambiarContrasena = ({ manejarContrasenaCambiada }) => {
                 </button>
             </div>
         </div>
-    );
+    </>
 };
 
 export default CambiarContrasena;

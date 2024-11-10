@@ -6,11 +6,11 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 const PaginaProducto = () => {
-  const { idProducto } = useParams(); // Obtener el id del producto desde la URL
-  const ubicacion = useLocation(); // Acceder a la ubicación para obtener datos
-  const productoSeleccionado = ubicacion.state?.producto; // Producto seleccionado enviado desde ProductoResumido
+  const { idProducto } = useParams(); 
+  const ubicacion = useLocation(); 
+  const productoSeleccionado = ubicacion.state?.producto; 
 
-  // Lista estática de productos para mostrar (sin conexión al backend)
+
   const productos = [
     { id: 1, nombre: 'Manzanas Frescas', precio: 5.50, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/limon.webp`, categoria: 'Frutas y Verduras' },
     { id: 2, nombre: 'Pechuga de Pollo', precio: 15.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/pechuga.jpg`, categoria: 'Carnes y Aves' },
@@ -33,14 +33,14 @@ const PaginaProducto = () => {
     return <div>Producto no encontrado</div>;
   }
 
-  // Filtrar productos relacionados por la misma categoría, excluyendo el producto actual
+
   const productosRelacionados = productos.filter(
     producto =>
       producto.categoria === productoSeleccionado.categoria &&
       producto.id !== productoSeleccionado.id
   );
 
-  return (
+  return <>
     <>
       <Header />
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
@@ -70,7 +70,7 @@ const PaginaProducto = () => {
       </div>
       <Footer />
     </>
-  );
+  </>
 };
 
 export default PaginaProducto;

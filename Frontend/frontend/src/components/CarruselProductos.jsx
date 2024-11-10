@@ -1,34 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import ProductoResumido from './ProductoResumido';
 
 const CarruselProductos = ({ productos }) => {
-  // Estado para manejar el grupo activo (3 productos por grupo)
   const [grupoActivo, setGrupoActivo] = useState(0);
 
-  // Dividir productos en grupos de 3
-  const dividirEnGrupos = (productos, cantidadPorGrupo = 3) => {
-    const grupos = [];
+  // Dividir productos en grupos de 3 y memorizar el resultado para evitar cálculos repetidos
+  const grupos = useMemo(() => {
+    const cantidadPorGrupo = 3;
+    const gruposCalculados = [];
     for (let i = 0; i < productos.length; i += cantidadPorGrupo) {
-      grupos.push(productos.slice(i, i + cantidadPorGrupo));
+      gruposCalculados.push(productos.slice(i, i + cantidadPorGrupo));
     }
-    return grupos;
-  };
+    return gruposCalculados;
+  }, [productos]);
 
-  const grupos = dividirEnGrupos(productos);
-
-  // Función para manejar el botón "siguiente"
   const manejarSiguiente = () => {
     setGrupoActivo((prev) => (prev + 1) % grupos.length);
   };
 
-  // Función para manejar el botón "anterior"
   const manejarAnterior = () => {
     setGrupoActivo((prev) => (prev - 1 + grupos.length) % grupos.length);
   };
 
-  return (
+  return <>
     <div className="carousel" style={{ margin: '0 auto', padding: '20px 0', position: 'relative' }}>
-      {/* Renderizar el grupo activo */}
       {grupos.length > 0 && (
         <div className="carousel-inner">
           <div className="carousel-item active">
@@ -42,7 +37,6 @@ const CarruselProductos = ({ productos }) => {
           </div>
         </div>
       )}
-      {/* Mostrar controles solo si hay más de un grupo */}
       {grupos.length > 1 && (
         <>
           <button
@@ -65,7 +59,6 @@ const CarruselProductos = ({ productos }) => {
             }}
           >
             <span className="carousel-control-prev-icon" aria-hidden="true" style={{ transform: 'scale(0.7)' }}></span>
-            <span className="visually-hidden">Previous</span>
           </button>
           <button
             className="carousel-control-next"
@@ -87,12 +80,11 @@ const CarruselProductos = ({ productos }) => {
             }}
           >
             <span className="carousel-control-next-icon" aria-hidden="true" style={{ transform: 'scale(0.7)' }}></span>
-            <span className="visually-hidden">Next</span>
           </button>
         </>
       )}
     </div>
-  );
+  </>
 };
 
 export default CarruselProductos;

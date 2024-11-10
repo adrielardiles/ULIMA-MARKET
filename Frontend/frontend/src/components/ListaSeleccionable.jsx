@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ListaSeleccionable = ({ titulo, elementos, elementoSeleccionado, setElementoSeleccionado, mostrarDetalle }) => {
-  return (
+  return <>
     <div style={{ width: '45%', marginRight: '20px' }}>
       <h4 style={{ textAlign: 'center' }}>{titulo}</h4>
       {elementos.map(elemento => (
@@ -21,7 +21,7 @@ const ListaSeleccionable = ({ titulo, elementos, elementoSeleccionado, setElemen
           <p>{elemento.numero || `${elemento.distrito}, ${elemento.provincia}`}</p>
           <button
             onClick={(e) => {
-              e.stopPropagation(); // Evitar selección accidental
+              e.stopPropagation();
               mostrarDetalle(elemento);
             }}
             style={{
@@ -37,7 +37,7 @@ const ListaSeleccionable = ({ titulo, elementos, elementoSeleccionado, setElemen
         </div>
       ))}
     </div>
-  );
+    </>
 };
 
 export default ListaSeleccionable;

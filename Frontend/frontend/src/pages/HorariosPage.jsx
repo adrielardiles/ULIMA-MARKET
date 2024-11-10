@@ -6,7 +6,6 @@ import Footer from '../components/Footer';
 
 
 const HorarioDeAtencion = () => {
-  // Array simulado con datos del horario
   const datosHorario = [
     { dia: 'Lunes', apertura: '08:00', cierre: '22:00' },
     { dia: 'Martes', apertura: '08:00', cierre: '22:00' },

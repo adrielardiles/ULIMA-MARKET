@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SeccionContacto = ({ datos }) => {
-  return (
+  return <>
     <div className="contacto">
       <h6 style={{ color: '#CE4500' }}>CONTÁCTANOS</h6>
       <p>
@@ -15,7 +15,7 @@ const SeccionContacto = ({ datos }) => {
         </a>
       </p>
     </div>
-  );
+  </>
 };
 
 export default SeccionContacto;

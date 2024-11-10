@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import EntradaDatos from './EntradaDatos'; // Componente de entrada reutilizable
-import SeleccionarDireccion from './SeleccionarDireccion'; // Componente de selección de dirección
-import { departamentosYProvincias } from './datosUbigeo'; // Importa los datos del ubigeo
+import EntradaDatos from './EntradaDatos';
+import SeleccionarDireccion from './SeleccionarDireccion';
+import { departamentosYProvincias } from './datosUbigeo';
 
 const AgregarMetodoPago = ({ agregarMetodo }) => {
     const [numeroTarjeta, setNumeroTarjeta] = useState('');
@@ -13,7 +13,7 @@ const AgregarMetodoPago = ({ agregarMetodo }) => {
     const manejarEnvio = (e) => {
         e.preventDefault();
         agregarMetodo({ numeroTarjeta, nombrePropietario, validoHasta, cve, ...direccion });
-        // Resetear campos después de agregar
+        // Resetea los campos después de agregar
         setNumeroTarjeta('');
         setNombrePropietario('');
         setValidoHasta('');
@@ -21,8 +21,7 @@ const AgregarMetodoPago = ({ agregarMetodo }) => {
         setDireccion({ departamento: '', provincia: '', distrito: '' });
     };
 
-    return (
-        <form onSubmit={manejarEnvio} className="mb-4">
+    return <>        <form onSubmit={manejarEnvio} className="mb-4">
             <div className="row">
                 <div className="col-md-6">
                     <EntradaDatos label="Número de Tarjeta" tipo="text" valor={numeroTarjeta} setValor={setNumeroTarjeta} />
@@ -40,7 +39,8 @@ const AgregarMetodoPago = ({ agregarMetodo }) => {
             </div>
             <button type="submit" className="btn btn-primary mt-3">Guardar</button>
         </form>
-    );
+    </>
+
 };
 
 export default AgregarMetodoPago;

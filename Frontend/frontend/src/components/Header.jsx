@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-import Carrito from './Carrito'; // Supuesto componente Carrito
-import Categorias from './Categorias'; // Supuesto componente Categorias
-import { useAuth } from '../context/AuthContext'; // Importa el hook useAuth
+import Carrito from './Carrito'; 
+import Categorias from './Categorias';
+import { useAuth } from '../context/AuthContext'; 
 
 const Header = () => {
   const navigate = useNavigate();
-  const { usuario, cerrarSesion } = useAuth(); // Obtiene usuario y función para cerrar sesión del contexto
+  const { usuario, cerrarSesion } = useAuth();
   const [mostrarMenuUsuario, setMostrarMenuUsuario] = useState(false);
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
 
-  // Manejo de búsqueda
+
   const manejarBusqueda = () => {
     if (terminoBusqueda.trim() === '') return;
 
@@ -35,16 +35,16 @@ const Header = () => {
     }
   };
 
-  // Manejo de navegación a pedidos
+
   const manejarNavegacionPedidos = () => {
     if (usuario) {
-      navigate('/pedidos');
+      navigate('/perfil');
     } else {
       navigate('/login');
     }
   };
 
-  // Manejo del menú de usuario
+
   const manejarToggleMenuUsuario = () => {
     setMostrarMenuUsuario(!mostrarMenuUsuario);
   };
@@ -55,14 +55,14 @@ const Header = () => {
     navigate('/');
   };
 
-  return (
+  return <>
     <div>
-      {/* Rectángulo negro en la parte superior */}
+
       <div style={{ backgroundColor: '#474747', height: '30px', width: '100%' }}></div>
 
       <div className="header pt-3 border-bottom">
         <div className="container d-flex justify-content-between align-items-center">
-          {/* Logo y Nombre con Navegación */}
+
           <div
             className="logo-section d-flex align-items-center"
             style={{ cursor: 'pointer' }}
@@ -72,7 +72,7 @@ const Header = () => {
             <h5 style={{ color: '#CE4500' }}>ULIMARKET</h5>
           </div>
 
-          {/* Barra de Búsqueda */}
+
           <div className="search-section d-flex align-items-center position-relative" style={{ width: '500px' }}>
             <input
               type="text"
@@ -97,23 +97,19 @@ const Header = () => {
             </span>
           </div>
 
-          {/* Secciones de Navegación e Iconos */}
           <div className="icons-section d-flex align-items-center">
-            {/* Navegación a Pedidos */}
             <div
               className="mx-3"
               style={{ cursor: 'pointer' }}
               onClick={manejarNavegacionPedidos}
             >
-              <span role="img" aria-label="Pedidos">📝</span> pedidos
+              <span role="img">📝</span> Perfil
             </div>
 
-            {/* Componente Carrito */}
             <div className="mx-3">
               <Carrito productos={[]} />
             </div>
 
-            {/* Menú de Usuario */}
             {usuario ? (
               <div
                 style={{ position: 'relative', cursor: 'pointer' }}
@@ -159,7 +155,7 @@ const Header = () => {
         <Categorias />
       </div>
     </div>
-  );
+  </>
 };
 
 export default Header;

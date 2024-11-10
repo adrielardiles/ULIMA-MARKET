@@ -1,8 +1,12 @@
 import React from 'react';
 import ProductoResumido from './ProductoResumido';
 
-const ContenidoCarrusel = ({ grupos, grupoActivo }) => (
-  grupos.length > 0 && (
+const ContenidoCarrusel = ({ grupos, grupoActivo }) => {
+  if (!grupos || grupos.length === 0) {
+    return null; // No renderiza nada si no hay grupos
+  }
+
+  return <>
     <div className="carousel-inner">
       <div className="carousel-item active">
         <div className="d-flex justify-content-center">
@@ -14,7 +18,7 @@ const ContenidoCarrusel = ({ grupos, grupoActivo }) => (
         </div>
       </div>
     </div>
-  )
-);
+  </>
+};
 
 export default ContenidoCarrusel;

@@ -1,13 +1,13 @@
 import React from 'react';
 
 const ProductoCarrito = ({ producto, eliminarProducto }) => {
-  // Manejo seguro de las propiedades del producto
-  const precio = producto?.precio ?? 0; // Si precio es undefined, usa 0
+  
+  const precio = producto?.precio ?? 0; 
   const nombre = producto?.nombre ?? 'Producto Desconocido';
   const cantidad = producto?.cantidad ?? 1;
-  const imagen = producto?.imagen ?? 'https://via.placeholder.com/150'; // URL de imagen predeterminada
+  const imagen = producto?.imagen ?? 'https://via.placeholder.com/150'; 
 
-  return (
+  return <>
     <div
       style={{
         border: '1px solid #ddd',
@@ -46,7 +46,7 @@ const ProductoCarrito = ({ producto, eliminarProducto }) => {
         Eliminar
       </button>
     </div>
-  );
+  </>
 };
 
 export default ProductoCarrito;

@@ -8,8 +8,6 @@ const BotonAgregar = ({ producto }) => {
 
   const manejarClickAgregar = () => {
     setMostrarCantidad(true);
-    // Agregar el producto al carrito con la cantidad actual
-    agregarProducto({ ...producto, cantidad });
   };
 
   const manejarCambioCantidad = (operacion) => {
@@ -27,7 +25,14 @@ const BotonAgregar = ({ producto }) => {
     });
   };
 
-  return (
+  const confirmarAgregarProducto = () => {
+    // Agregar el producto al carrito con la cantidad actual
+    agregarProducto({ ...producto, cantidad });
+    // Opcionalmente, puedes ocultar la sección de cantidad
+    setMostrarCantidad(false);
+  };
+
+  return <>
     <div style={{ textAlign: 'center', marginTop: '10px' }}>
       {!mostrarCantidad ? (
         <button className="btn btn-success" onClick={manejarClickAgregar}>
@@ -52,7 +57,7 @@ const BotonAgregar = ({ producto }) => {
           </button>
           <button
             className="btn btn-primary"
-            onClick={() => agregarProducto({ ...producto, cantidad })} // Agregar con cantidad actualizada
+            onClick={confirmarAgregarProducto} // Llamar a la función confirmación
             style={{ marginLeft: '10px' }}
           >
             Confirmar
@@ -60,7 +65,7 @@ const BotonAgregar = ({ producto }) => {
         </div>
       )}
     </div>
-  );
+  </>
 };
 
 export default BotonAgregar;

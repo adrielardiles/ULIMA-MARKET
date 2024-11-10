@@ -14,7 +14,7 @@ const opcionesMenu = [
 const PerfilPage = () => {
     const [opcionSeleccionada, setOpcionSeleccionada] = useState("perfil");
 
-    return (
+    return <>
         <>
             <Header />
             <div className="container my-5">
@@ -28,7 +28,7 @@ const PerfilPage = () => {
                     <p className="fw-bold">Hola, Adriel!</p>
                 </div>
 
-                {/* Menú de Opciones */}
+
                 <div className="d-flex justify-content-center mb-4">
                     <ul className="nav nav-pills">
                         {opcionesMenu.map((opcion) => (
@@ -45,14 +45,14 @@ const PerfilPage = () => {
                     </ul>
                 </div>
 
-                {/* Contenido */}
+
                 <div className="p-4 border rounded bg-light">
                     <PerfilContenido opcion={opcionSeleccionada} />
                 </div>
             </div>
             <Footer />
         </>
-    );
+    </>
 };
 
 export default PerfilPage;

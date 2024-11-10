@@ -6,12 +6,11 @@ const ModificarCorreo = ({ correo, actualizarCorreo }) => {
     const manejarEnvio = (e) => {
         e.preventDefault();
         const nuevoCorreo = e.target.nuevoCorreo.value;
-        // Aquí puedes agregar validaciones
         actualizarCorreo(nuevoCorreo);
         setMostrarFormulario(false);
     };
 
-    return (
+    return <>
         <div className="card mb-4">
             <div className="card-body">
                 <h5 className="card-title">Correo Electrónico</h5>
@@ -36,7 +35,7 @@ const ModificarCorreo = ({ correo, actualizarCorreo }) => {
                 )}
             </div>
         </div>
-    );
+    </>
 };
 
 export default ModificarCorreo;

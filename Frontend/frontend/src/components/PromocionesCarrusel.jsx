@@ -19,7 +19,7 @@ const PromocionesCarrusel = ({ promociones }) => {
     setIndiceActivo(index);
   };
 
-  return (
+  return <>
     <div id="customCarousel" className="carousel slide">
       <div className="carousel-inner">
         {promociones.map((promocion, index) => (
@@ -46,7 +46,6 @@ const PromocionesCarrusel = ({ promociones }) => {
             className={`btn btn-sm ${index === indiceActivo ? 'btn-dark' : 'btn-light'}`}
             style={{ margin: '0 2px', borderRadius: '50%' }}
             onClick={() => seleccionarSlide(index)}
-            aria-label={`Slide ${index + 1}`}
           ></button>
         ))}
       </div>
@@ -68,7 +67,7 @@ const PromocionesCarrusel = ({ promociones }) => {
         <span className="visually-hidden">Next</span>
       </button>
     </div>
-  );
+  </>
 };
 
 export default PromocionesCarrusel;

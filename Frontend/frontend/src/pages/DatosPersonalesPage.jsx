@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 
 
 const DatosPersonales = () => {
-  return (
+  return <>
     <>
       <Header/>
       <div className="container mt-5">
@@ -51,7 +51,7 @@ const DatosPersonales = () => {
       </div>
       <Footer />
     </>
-  );
+  </>
 };
 
 export default DatosPersonales;

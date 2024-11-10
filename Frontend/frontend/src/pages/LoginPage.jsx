@@ -4,24 +4,24 @@ import { useState } from "react";
 import LoginFormulario from "../components/LoginForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { useAuth } from "../context/AuthContext"; // Importa el contexto de autenticación
+import { useAuth } from "../context/AuthContext"; 
 
 const LoginPage = () => {
     const [error, setError] = useState("");
-    const { iniciarSesion } = useAuth(); // Usa `iniciarSesion` del contexto
+    const { iniciarSesion } = useAuth();
     const navigate = useNavigate();
 
     const loginHandler = async (username, password) => {
         if (username === "Ulima" && password === "123") {
             setError("");
-            iniciarSesion({ nombre: username }); // Establece el usuario autenticado
-            navigate("/"); // Redirige al home
+            iniciarSesion({ nombre: username }); 
+            navigate("/"); 
         } else {
             setError("Error Login");
         }
     };
 
-    return (
+    return <>
         <>
             <Header />
             <div className="row mt-5 mb-5">
@@ -36,7 +36,6 @@ const LoginPage = () => {
                             Email o Contraseña incorrecta
                         </div>
                     )}
-                    {/* Enlace para redirigir a la página de registro */}
                     <div className="text-center mt-3">
                         <a
                             href="/register"
@@ -51,7 +50,7 @@ const LoginPage = () => {
             </div>
             <Footer />
         </>
-    );
+    </>
 };
 
 export default LoginPage;

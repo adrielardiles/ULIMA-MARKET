@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SeccionPoliticas = ({ politicas, navigate }) => {
-  return (
+  return <>
     <div className="politicas-uso">
       <h6 style={{ color: '#CE4500' }}>POLÍTICAS DE USO</h6>
       {politicas.map((politica, index) => (
@@ -15,7 +15,7 @@ const SeccionPoliticas = ({ politicas, navigate }) => {
         </p>
       ))}
     </div>
-  );
+  </>
 };
 
 export default SeccionPoliticas;

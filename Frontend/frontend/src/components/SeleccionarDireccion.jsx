@@ -35,7 +35,7 @@ const SeleccionarDireccion = ({ label, departamentosData, onChange }) => {
     const provincias = departamento ? Object.keys(departamentosData?.[departamento]?.provincias || {}) : [];
     const distritos = provincia ? departamentosData?.[departamento]?.provincias?.[provincia] || [] : [];
 
-    return (
+    return <>
         <div>
             <label className="form-label">{label} - Departamento</label>
             <select className="form-select mb-3" value={departamento} onChange={manejarCambioDepartamento}>
@@ -61,7 +61,7 @@ const SeleccionarDireccion = ({ label, departamentosData, onChange }) => {
                 ))}
             </select>
         </div>
-    );
+    </>
 };
 
 export default SeleccionarDireccion;

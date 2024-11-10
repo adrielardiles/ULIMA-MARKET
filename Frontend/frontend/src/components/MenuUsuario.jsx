@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext'; // Importa el contexto de autenticación
+import { useAuth } from '../context/AuthContext'; 
 
 const MenuUsuario = ({ usuario }) => {
-    const { cerrarSesion } = useAuth(); // Usa `cerrarSesion` del contexto
+    const { cerrarSesion } = useAuth(); 
     const [mostrarMenu, setMostrarMenu] = useState(false);
 
     const manejarToggleMenu = () => {
-        setMostrarMenu(!mostrarMenu); // Alterna la visibilidad del menú
+        setMostrarMenu(!mostrarMenu); 
     };
 
     const manejarCerrarSesion = () => {
-        cerrarSesion(); // Cierra la sesión
-        setMostrarMenu(false); // Oculta el menú
+        cerrarSesion(); 
+        setMostrarMenu(false); 
     };
 
-    return (
+    return <>
         <div style={{ position: 'relative' }}>
             {usuario ? (
                 <div onClick={manejarToggleMenu} style={{ cursor: 'pointer' }}>
@@ -54,7 +54,7 @@ const MenuUsuario = ({ usuario }) => {
                 </div>
             )}
         </div>
-    );
+    </>
 };
 
 export default MenuUsuario;

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import PedidoItem from './PedidoItem'; // Componente hijo
+import PedidoItem from './PedidoItem'; 
 
 const Pedidos = () => {
-    // Lista de objetos pedidos como datos por defecto (simulando datos obtenidos del backend)
     const pedidosPorDefecto = [
         { id: 1, fecha: "03/10/24", monto: 50.25, productos: [{ nombre: "Producto A", cantidad: 2, precio: 25.12 }] },
         { id: 2, fecha: "04/10/24", monto: 30.00, productos: [{ nombre: "Producto B", cantidad: 1, precio: 30.00 }] },
@@ -10,9 +9,9 @@ const Pedidos = () => {
         { id: 4, fecha: "06/10/24", monto: 20.00, productos: [{ nombre: "Producto D", cantidad: 1, precio: 20.00 }] },
     ];
 
-    const [pedidos, setPedidos] = useState(pedidosPorDefecto); // Se usará para manejar la lista de pedidos
+    const [pedidos] = useState(pedidosPorDefecto);
 
-    return (
+    return <>
         <div className="container">
             <h2 className="text-center mb-4">Tus Pedidos</h2>
             <div className="row">
@@ -23,7 +22,7 @@ const Pedidos = () => {
                 ))}
             </div>
         </div>
-    );
+    </>
 };
 
 export default Pedidos;

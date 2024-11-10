@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const VerMetodosPago = ({ metodos, eliminarMetodo }) => {
     const [metodoSeleccionado, setMetodoSeleccionado] = useState(null);
 
-    return (
+    return <>
         <div>
             <div className="row">
                 {metodos.map((metodo) => (
@@ -33,7 +33,7 @@ const VerMetodosPago = ({ metodos, eliminarMetodo }) => {
                 ))}
             </div>
         </div>
-    );
+    </>
 };
 
 export default VerMetodosPago;

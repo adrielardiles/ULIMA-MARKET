@@ -16,10 +16,10 @@ const PagarTotal = () => {
   const [mostrarModal, setMostrarModal] = useState(false);
   const navigate = useNavigate();
 
-  const { productosCarrito, vaciarCarrito } = useCarrito(); // Obtener productos del carrito y función para vaciarlo
+  const { productosCarrito, vaciarCarrito } = useCarrito(); 
   const total = productosCarrito.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
 
-  // Arrays de ejemplo
+
   const metodosPago = [
     { id: 1, tipo: 'Tarjeta de Crédito', numero: '**** 1234', titular: 'Juan Pérez', fechaVencimiento: '12/24', banco: 'Banco 1' },
     { id: 2, tipo: 'PayPal', numero: 'usuario@example.com', titular: 'María Gómez', fechaVencimiento: 'N/A', banco: 'PayPal' }
@@ -32,24 +32,24 @@ const PagarTotal = () => {
 
   const handlePagar = () => {
     if (metodoSeleccionado && direccionSeleccionada) {
-      setMostrarModal(true); // Muestra el modal de confirmación
+      setMostrarModal(true); 
     }
   };
 
   const confirmarPago = () => {
     setMostrarModal(false);
-    vaciarCarrito(); // Vacía el carrito después de confirmar el pago
-    navigate('/'); // Redirigir al menú principal
+    vaciarCarrito(); 
+    navigate('/'); 
   };
 
-  return (
+  return <>
     <>
       <Header />
 
       <div style={{ marginTop: '50px', marginBottom: '50px', padding: '20px' }}>
         <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>Total a Pagar: S/ {total.toFixed(2)}</h2>
 
-        {/* Sección de Métodos de Pago */}
+
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '30px' }}>
           <ListaSeleccionable
             titulo="Métodos de Pago"
@@ -61,7 +61,7 @@ const PagarTotal = () => {
               setMostrarPopupMetodo(true);
             }}
           />
-          {/* Sección de Direcciones */}
+
           <ListaSeleccionable
             titulo="Direcciones"
             elementos={direcciones}
@@ -74,7 +74,7 @@ const PagarTotal = () => {
           />
         </div>
 
-        {/* Botón de Pagar */}
+
         <div style={{ textAlign: 'center' }}>
           <button
             onClick={handlePagar}
@@ -92,7 +92,7 @@ const PagarTotal = () => {
           </button>
         </div>
 
-        {/* Modal de confirmación con Bootstrap */}
+
         <div className={`modal fade ${mostrarModal ? 'show' : ''}`} style={{ display: mostrarModal ? 'block' : 'none' }} tabIndex="-1">
           <div className="modal-dialog">
             <div className="modal-content">
@@ -112,7 +112,6 @@ const PagarTotal = () => {
           </div>
         </div>
 
-        {/* Popup de Detalles de Método de Pago */}
         {mostrarPopupMetodo && metodoDetalle && (
           <VerDetallesPopup
             titulo="Detalles del Método de Pago"
@@ -128,7 +127,6 @@ const PagarTotal = () => {
           />
         )}
 
-        {/* Popup de Detalles de Dirección */}
         {mostrarPopupDireccion && direccionDetalle && (
           <VerDetallesPopup
             titulo="Detalles de la Dirección"
@@ -149,7 +147,7 @@ const PagarTotal = () => {
       </div>
       <Footer />
     </>
-  );
+  </>
 };
 
 export default PagarTotal;

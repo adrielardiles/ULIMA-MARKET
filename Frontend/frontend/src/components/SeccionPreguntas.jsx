@@ -5,11 +5,10 @@ const SeccionPreguntas = ({ titulo, preguntasRespuestas }) => {
   const [indiceExpandido, setIndiceExpandido] = useState(null);
 
   const manejarToggle = (indice) => {
-    // Chicos he puesto esto para que Si el índice ya está expandido, colapsa al hacer clic de nuevo
     setIndiceExpandido(indiceExpandido === indice ? null : indice);
   };
 
-  return (
+  return <>
     <div className="mt-5">
       <h2 className="mb-4 text-center ">{titulo}</h2>
       <div className="accordion">
@@ -24,7 +23,7 @@ const SeccionPreguntas = ({ titulo, preguntasRespuestas }) => {
         ))}
       </div>
     </div>
-  );
+  </>
 };
 
 export default SeccionPreguntas;

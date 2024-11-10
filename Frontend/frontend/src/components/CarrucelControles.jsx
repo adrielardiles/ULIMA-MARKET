@@ -1,9 +1,8 @@
 import React from 'react';
 
-const CarouselControls = ({ onSiguiente, onAnterior }) => (
+const CarrucelControles = ({ onSiguiente, onAnterior }) => (
   <>
     <button
-      className="carousel-control-prev"
       type="button"
       onClick={onAnterior}
       style={{
@@ -23,13 +22,10 @@ const CarouselControls = ({ onSiguiente, onAnterior }) => (
     >
       <span
         className="carousel-control-prev-icon"
-        aria-hidden="true"
         style={{ transform: 'scale(0.7)' }}
       ></span>
-      <span className="visually-hidden">Previous</span>
     </button>
     <button
-      className="carousel-control-next"
       type="button"
       onClick={onSiguiente}
       style={{
@@ -49,12 +45,10 @@ const CarouselControls = ({ onSiguiente, onAnterior }) => (
     >
       <span
         className="carousel-control-next-icon"
-        aria-hidden="true"
         style={{ transform: 'scale(0.7)' }}
       ></span>
-      <span className="visually-hidden">Next</span>
     </button>
   </>
 );
 
-export default CarouselControls;
+export default CarrucelControles;

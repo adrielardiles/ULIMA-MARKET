@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 const TermsAndConditions = () => {
   const navigate = useNavigate();
 
-  return (
+  return <>
     <>
       <Header/>
       <div className="container mt-5">
@@ -82,7 +82,7 @@ const TermsAndConditions = () => {
       </div>
       <Footer/>
     </>
-  );
+  </>
 };
 
 export default TermsAndConditions;

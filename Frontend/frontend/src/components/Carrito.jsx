@@ -11,8 +11,10 @@ const Carrito = () => {
   const { usuario } = useAuth(); // Obtener el usuario autenticado del contexto de autenticación
   const navigate = useNavigate();
 
+  // Calcular el subtotal de los productos en el carrito
   const subtotal = productosCarrito.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
 
+  // Manejar la redirección de finalizar pedido
   const manejarFinalizarPedido = () => {
     setMostrarCarrito(false);
     if (usuario) {
@@ -22,11 +24,12 @@ const Carrito = () => {
     }
   };
 
-  return (
-    <>
+  return <>
+      {/* Botón para mostrar el carrito */}
       <div style={{ cursor: 'pointer' }} onClick={() => setMostrarCarrito(true)}>
         🛒 Carrito ({productosCarrito.reduce((total, producto) => total + producto.cantidad, 0)})
       </div>
+
       {/* Barra lateral del carrito */}
       <div
         style={{
@@ -43,6 +46,7 @@ const Carrito = () => {
           overflowY: 'auto'
         }}
       >
+        {/* Encabezado del carrito */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h4>Productos Agregados</h4>
           <button
@@ -57,7 +61,10 @@ const Carrito = () => {
             &times;
           </button>
         </div>
+
         <hr />
+
+        {/* Lista de productos en el carrito */}
         {productosCarrito.length === 0 ? (
           <p>No hay productos en el carrito.</p>
         ) : (
@@ -69,7 +76,10 @@ const Carrito = () => {
             />
           ))
         )}
+
         <hr />
+
+        {/* Botón para eliminar todos los productos */}
         {productosCarrito.length > 0 && (
           <button
             style={{
@@ -87,6 +97,8 @@ const Carrito = () => {
             Eliminar Todos
           </button>
         )}
+
+        {/* Sección de subtotal y botón de finalizar pedido */}
         <div>
           <p style={{ display: 'flex', justifyContent: 'space-between' }}>
             <span>Subtotal:</span>
@@ -109,7 +121,7 @@ const Carrito = () => {
         </div>
       </div>
     </>
-  );
+  
 };
 
 export default Carrito;
