@@ -12,7 +12,7 @@ root.render(
   <React.StrictMode>
     <AuthProvider>
       <CarritoProvider>
-        <ProductosProvider> {/* Envuelve con ProductosProvider */}
+        <ProductosProvider>
           <RouterProvider router={router} />
         </ProductosProvider>
       </CarritoProvider>
