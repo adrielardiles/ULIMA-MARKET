@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import { Modal, Button } from "react-bootstrap";
 import IngresarCodigo from "../components/IngresarCodigo";
 import CambiarContrasena from "../components/CambiarContrasena";
 
 const RecuperarCuenta = () => {
     const [etapa, setEtapa] = useState("ingresarCodigo");
-    const [codigoCorrecto, setCodigoCorrecto] = useState("1234"); 
+    const [codigoCorrecto, setCodigoCorrecto] = useState("1234");
     const [codigoIngresado, setCodigoIngresado] = useState("");
     const [mostrarModal, setMostrarModal] = useState(false);
     const [mensajeModal, setMensajeModal] = useState("");
@@ -32,6 +33,7 @@ const RecuperarCuenta = () => {
     };
 
     return <>
+        <Header/>
         <div className="container mt-5">
             {etapa === "ingresarCodigo" ? (
                 <IngresarCodigo
@@ -45,7 +47,6 @@ const RecuperarCuenta = () => {
                 <CambiarContrasena manejarContrasenaCambiada={manejarContrasenaCambiada} />
             )}
 
-
             <Modal show={mostrarModal} onHide={() => setMostrarModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Mensaje</Modal.Title>
@@ -58,6 +59,7 @@ const RecuperarCuenta = () => {
                 </Modal.Footer>
             </Modal>
         </div>
+        <Footer />
     </>
 };
 

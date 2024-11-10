@@ -25,7 +25,7 @@ const PerfilPage = () => {
                         className="rounded-circle mb-2"
                         style={{ width: '100px', height: '100px' }}
                     />
-                    <p className="fw-bold">Hola, Adriel!</p>
+                    <p className="fw-bold">Hola, Cliente!</p>
                 </div>
 
 
