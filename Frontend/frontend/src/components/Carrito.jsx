@@ -3,17 +3,23 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductoCarrito from './ProductoCarrito'; // Componente para mostrar cada producto
 import { useCarrito } from '../context/CarritoContext'; // Importar el contexto del carrito
+import { useAuth } from '../context/AuthContext'; // Importar el contexto de autenticación
 
 const Carrito = () => {
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
-  const { productosCarrito, eliminarProducto, vaciarCarrito } = useCarrito(); // Obtener estado y funciones del contexto
+  const { productosCarrito, eliminarProducto, vaciarCarrito } = useCarrito(); // Obtener estado y funciones del contexto del carrito
+  const { usuario } = useAuth(); // Obtener el usuario autenticado del contexto de autenticación
   const navigate = useNavigate();
 
   const subtotal = productosCarrito.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
 
   const manejarFinalizarPedido = () => {
     setMostrarCarrito(false);
-    navigate('/pagarTotal');
+    if (usuario) {
+      navigate('/pagarTotal'); // Redirigir a la página de pago si el usuario está autenticado
+    } else {
+      navigate('/login'); // Redirigir a la página de inicio de sesión si el usuario no está autenticado
+    }
   };
 
   return (

@@ -1,24 +1,25 @@
-import { useNavigate } from "react-router-dom"
-import "../../node_modules/bootstrap/dist/css/bootstrap.css"
-
-import { useState } from "react"
-import LoginFormulario from "../components/LoginForm"
-import Footer from "../components/Footer"
-import Header from "../components/Header"
+import { useNavigate } from "react-router-dom";
+import "../../node_modules/bootstrap/dist/css/bootstrap.css";
+import { useState } from "react";
+import LoginFormulario from "../components/LoginForm";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import { useAuth } from "../context/AuthContext"; // Importa el contexto de autenticación
 
 const LoginPage = () => {
-    const [error, setError] = useState("")
-
-    const navigate = useNavigate()
+    const [error, setError] = useState("");
+    const { iniciarSesion } = useAuth(); // Usa `iniciarSesion` del contexto
+    const navigate = useNavigate();
 
     const loginHandler = async (username, password) => {
         if (username === "Ulima" && password === "123") {
-            setError("")
-            navigate("/")
+            setError("");
+            iniciarSesion({ nombre: username }); // Establece el usuario autenticado
+            navigate("/"); // Redirige al home
         } else {
-            setError("Error Login")
+            setError("Error Login");
         }
-    }
+    };
 
     return (
         <>
@@ -50,7 +51,7 @@ const LoginPage = () => {
             </div>
             <Footer />
         </>
-    )
-}
+    );
+};
 
-export default LoginPage
+export default LoginPage;

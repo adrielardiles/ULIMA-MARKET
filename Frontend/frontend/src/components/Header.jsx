@@ -3,15 +3,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 import Carrito from './Carrito'; // Supuesto componente Carrito
 import Categorias from './Categorias'; // Supuesto componente Categorias
-import MenuUsuario from './MenuUsuario'; // Supuesto componente MenuUsuario
 import { useAuth } from '../context/AuthContext'; // Importa el hook useAuth
 
 const Header = () => {
   const navigate = useNavigate();
-  const { usuario } = useAuth(); // Usa el hook useAuth para obtener el usuario
+  const { usuario, cerrarSesion } = useAuth(); // Obtiene usuario y función para cerrar sesión del contexto
+  const [mostrarMenuUsuario, setMostrarMenuUsuario] = useState(false);
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
 
-  // Función de manejo de búsqueda (tu lógica existente)
+  // Manejo de búsqueda
   const manejarBusqueda = () => {
     if (terminoBusqueda.trim() === '') return;
 
@@ -42,6 +42,17 @@ const Header = () => {
     } else {
       navigate('/login');
     }
+  };
+
+  // Manejo del menú de usuario
+  const manejarToggleMenuUsuario = () => {
+    setMostrarMenuUsuario(!mostrarMenuUsuario);
+  };
+
+  const manejarCerrarSesion = () => {
+    cerrarSesion();
+    setMostrarMenuUsuario(false);
+    navigate('/');
   };
 
   return (
@@ -92,18 +103,57 @@ const Header = () => {
             <div
               className="mx-3"
               style={{ cursor: 'pointer' }}
-              onClick={manejarNavegacionPedidos} // Llama a la función de manejo
+              onClick={manejarNavegacionPedidos}
             >
               <span role="img" aria-label="Pedidos">📝</span> pedidos
             </div>
 
-            {/* Componente Carrito con productos */}
+            {/* Componente Carrito */}
             <div className="mx-3">
               <Carrito productos={[]} />
             </div>
 
             {/* Menú de Usuario */}
-            <MenuUsuario usuario={usuario} />
+            {usuario ? (
+              <div
+                style={{ position: 'relative', cursor: 'pointer' }}
+                onClick={manejarToggleMenuUsuario}
+              >
+                {usuario.nombre}
+                {mostrarMenuUsuario && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      right: 0,
+                      background: '#fff',
+                      border: '1px solid #ccc',
+                      borderRadius: '5px',
+                      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                      zIndex: 1000,
+                    }}
+                  >
+                    <button
+                      onClick={manejarCerrarSesion}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        padding: '10px 20px',
+                        cursor: 'pointer',
+                        width: '100%',
+                        textAlign: 'left',
+                      }}
+                    >
+                      Cerrar Sesión
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div onClick={() => navigate('/login')} style={{ cursor: 'pointer' }}>
+                Iniciar Sesión
+              </div>
+            )}
           </div>
         </div>
         <Categorias />
