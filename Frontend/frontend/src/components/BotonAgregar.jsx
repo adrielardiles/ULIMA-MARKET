@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
+import { useCarrito } from '../context/CarritoContext';
 
-const BotonAgregar = ({ precio }) => {
+const BotonAgregar = ({ producto }) => {
+  const { agregarProducto } = useCarrito(); // Obtener la función para agregar producto al carrito
   const [mostrarCantidad, setMostrarCantidad] = useState(false);
   const [cantidad, setCantidad] = useState(1);
 
   const manejarClickAgregar = () => {
     setMostrarCantidad(true);
+    // Agregar el producto al carrito con la cantidad actual
+    agregarProducto({ ...producto, cantidad });
   };
 
   const manejarCambioCantidad = (operacion) => {
     setCantidad((prevCantidad) => {
-      if (operacion === 'incrementar') return prevCantidad + 1;
+      let nuevaCantidad = prevCantidad;
+      if (operacion === 'incrementar') nuevaCantidad = prevCantidad + 1;
       if (operacion === 'decrementar') {
         if (prevCantidad === 1) {
-          setMostrarCantidad(false); // Oculta el componente si la cantidad es 1 y se presiona el botón de decrementar
-          return 1; // Mantiene la cantidad en 1 para evitar valores negativos
+          setMostrarCantidad(false);
+          return 1;
         }
-        return prevCantidad - 1;
+        nuevaCantidad = prevCantidad - 1;
       }
-      return prevCantidad;
+      return nuevaCantidad;
     });
   };
 
@@ -33,7 +38,7 @@ const BotonAgregar = ({ precio }) => {
           <button
             className="btn btn-light"
             onClick={() => manejarCambioCantidad('decrementar')}
-            style={{ padding: '0 10px', border: '1px solid #ccc', marginRight: '10px' }} // Espaciado derecho
+            style={{ padding: '0 10px', border: '1px solid #ccc', marginRight: '10px' }}
           >
             -
           </button>
@@ -41,11 +46,17 @@ const BotonAgregar = ({ precio }) => {
           <button
             className="btn btn-success"
             onClick={() => manejarCambioCantidad('incrementar')}
-            style={{ padding: '0 10px', border: '1px solid #ccc', color: 'white', marginLeft: '10px' }} // Espaciado izquierdo
+            style={{ padding: '0 10px', border: '1px solid #ccc', color: 'white', marginLeft: '10px' }}
           >
             +
           </button>
-          <span className="ml-3" style={{ marginLeft: '15px' }}>S/ {(precio * cantidad).toFixed(2)}</span> {/* Espaciado adicional */}
+          <button
+            className="btn btn-primary"
+            onClick={() => agregarProducto({ ...producto, cantidad })} // Agregar con cantidad actualizada
+            style={{ marginLeft: '10px' }}
+          >
+            Confirmar
+          </button>
         </div>
       )}
     </div>

@@ -1,15 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import BotonAgregar from '../components/BotonAgregar';
+import { useNavigate } from 'react-router-dom'; // Importa el hook useNavigate
+import BotonAgregar from './BotonAgregar';
 
 const ProductoResumido = ({ producto }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Usa el hook de navegación
 
   const manejarClickImagen = () => {
-    // Navegar a la página de detalle del producto con el estado
-    navigate(`/producto/${producto.id}`, {
-      state: { producto }
-    });
+    navigate(`/producto/${producto.id}`, { state: { producto } });
+
   };
 
   return (
@@ -18,18 +16,18 @@ const ProductoResumido = ({ producto }) => {
         src={producto.imagen}
         className="card-img-top"
         alt={producto.nombre}
-        onClick={manejarClickImagen}
         style={{
           cursor: 'pointer',
           width: '100%',
           height: '200px',
           objectFit: 'contain'
         }}
+        onClick={manejarClickImagen} // Añade el manejador de clic para redirigir
       />
       <div className="card-body align-items-center">
         <h5 className="card-title">{producto.nombre}</h5>
         <p className="card-text">S/ {producto.precio.toFixed(2)}</p>
-        <BotonAgregar precio={producto.precio} />
+        <BotonAgregar producto={producto} />
       </div>
     </div>
   );

@@ -1,47 +1,27 @@
+// src/components/Carrito.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductoCarrito from './ProductoCarrito'; // Componente para mostrar cada producto
-import { useAuth } from '../context/AuthContext'; // Importar el contexto de autenticación
+import { useCarrito } from '../context/CarritoContext'; // Importar el contexto del carrito
 
-const Carrito = ({ productosIniciales = [] }) => {
-  const [productos, setProductos] = useState(productosIniciales);
+const Carrito = () => {
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
+  const { productosCarrito, eliminarProducto, vaciarCarrito } = useCarrito(); // Obtener estado y funciones del contexto
   const navigate = useNavigate();
-  const { usuario } = useAuth(); // Obtener el estado del usuario del contexto de autenticación
 
-  // Calcular subtotal
-  const subtotal = productos.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
+  const subtotal = productosCarrito.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
 
-  // Manejar eliminación de un producto individual
-  const eliminarProducto = (id) => {
-    setProductos(productos.filter(producto => producto.id !== id));
-  };
-
-  // Manejar eliminación de todos los productos
-  const eliminarTodosLosProductos = () => {
-    setProductos([]);
-  };
-
-  // Manejar la finalización del pedido
   const manejarFinalizarPedido = () => {
     setMostrarCarrito(false);
-    if (!usuario) {
-      // Si no hay usuario autenticado, redirige a /login
-      navigate('/login');
-    } else {
-      // Si hay usuario autenticado, redirige a /pagarTotal
-      navigate('/pagarTotal');
-    }
+    navigate('/pagarTotal');
   };
 
   return (
     <>
-      {/* Botón para mostrar el carrito */}
       <div style={{ cursor: 'pointer' }} onClick={() => setMostrarCarrito(true)}>
-        🛒 Carrito ({productos.length})
+        🛒 Carrito ({productosCarrito.reduce((total, producto) => total + producto.cantidad, 0)})
       </div>
-
-      {/* Barra lateral de carrito */}
+      {/* Barra lateral del carrito */}
       <div
         style={{
           position: 'fixed',
@@ -57,7 +37,6 @@ const Carrito = ({ productosIniciales = [] }) => {
           overflowY: 'auto'
         }}
       >
-        {/* Botón de cerrar */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h4>Productos Agregados</h4>
           <button
@@ -72,14 +51,11 @@ const Carrito = ({ productosIniciales = [] }) => {
             &times;
           </button>
         </div>
-
         <hr />
-
-        {/* Productos en el carrito */}
-        {productos.length === 0 ? (
+        {productosCarrito.length === 0 ? (
           <p>No hay productos en el carrito.</p>
         ) : (
-          productos.map((producto) => (
+          productosCarrito.map((producto) => (
             <ProductoCarrito
               key={producto.id}
               producto={producto}
@@ -87,11 +63,8 @@ const Carrito = ({ productosIniciales = [] }) => {
             />
           ))
         )}
-
         <hr />
-
-        {/* Botón para eliminar todos los productos */}
-        {productos.length > 0 && (
+        {productosCarrito.length > 0 && (
           <button
             style={{
               background: 'red',
@@ -103,20 +76,14 @@ const Carrito = ({ productosIniciales = [] }) => {
               marginBottom: '10px',
               borderRadius: '5px'
             }}
-            onClick={eliminarTodosLosProductos}
+            onClick={vaciarCarrito}
           >
             Eliminar Todos
           </button>
         )}
-
-        {/* Subtotal y botón para finalizar el pedido */}
         <div>
           <p style={{ display: 'flex', justifyContent: 'space-between' }}>
             <span>Subtotal:</span>
-            <span>S/ {subtotal.toFixed(2)}</span>
-          </p>
-          <p style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span>Total:</span>
             <span>S/ {subtotal.toFixed(2)}</span>
           </p>
           <button

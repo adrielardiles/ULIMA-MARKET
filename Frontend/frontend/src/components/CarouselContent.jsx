@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductoResumido from './ProductoResumido';
 
-const CarouselContent = ({ grupos, grupoActivo }) => (
+const ContenidoCarrusel = ({ grupos, grupoActivo }) => (
   grupos.length > 0 && (
     <div className="carousel-inner">
       <div className="carousel-item active">
@@ -17,4 +17,4 @@ const CarouselContent = ({ grupos, grupoActivo }) => (
   )
 );
 
-export default CarouselContent;
+export default ContenidoCarrusel;
