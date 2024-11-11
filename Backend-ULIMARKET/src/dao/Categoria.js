@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize"
 import sequelize from '../database/database.js'
 import Producto from './Producto.js'
 import Promocion from './Promociones.js'
+import Banner from "./Banner.js"
 
 const Categoria = sequelize.define("Categoria_Producto",
     {
@@ -40,8 +41,16 @@ Promocion.belongsTo(Categoria, {
     foreignKey: 'categoria_id',
     targetId: 'id'
 });
-  
-  
+
+Categoria.hasOne(Banner, {
+    foreignKey: 'categoria_id',
+    onDelete: 'CASCADE'
+})
+
+Banner.belongsTo(Categoria, {
+    foreignKey: 'categoria_id',
+    targetId: 'id'
+})
 
   
 

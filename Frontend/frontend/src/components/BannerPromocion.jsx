@@ -1,34 +1,54 @@
+import React, { useState, useEffect } from 'react';
+
 const BannerPromocion = ({ categoriaId }) => {
+  const [banners, setBanners] = useState([]);
+  const [error, setError] = useState(null);
 
-  const banners = [
-      { id: 1, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/bebidas.webp`, categoriaId: 'bebidas' },
-      { id: 2, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/carnes.png`, categoriaId: 'carnes y aves' },
-      { id: 3, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/leche.webp`, categoriaId: 'lácteos y huevos' },
-      { id: 4, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/frutasVerduras.webp`, categoriaId: 'frutas y verduras' },
-  ];
+  const fetchBanners = async () => {
+    try {
+      const respuesta = await fetch(`http://localhost:3000/banners/categoria/${categoriaId}`);
+      if (!respuesta.ok) {
+        if (respuesta.status === 404) {
+          setBanners([]);
+          return;
+        }
+        throw new Error('Error al obtener los banners');
+      }
+      const data = await respuesta.json();
+      setBanners(data);
+    } catch (err) {
+      setError(err.message);
+      setBanners([]);
+    }
+  };
 
+  useEffect(() => {
+    if (categoriaId) {
+      fetchBanners();
+    }
+  }, [categoriaId]);
 
-  const normalizedCategoriaId = categoriaId.toLowerCase().replace(/\s/g, '');
+  if (banners.length === 0) {
+    return null;
+  }
 
-
-  const bannerSeleccionado = banners.find(banner =>
-      banner.categoriaId.toLowerCase().replace(/\s/g, '') === normalizedCategoriaId
+  return (
+    <div className="banner-promocion">
+      {banners.map((banner, index) => (
+        <img
+          key={index}
+          src={banner.imagen.startsWith('http') ? banner.imagen : `${process.env.PUBLIC_URL}${banner.imagen}`}
+          alt={`Banner de categoría ${categoriaId}`}
+          style={{ 
+            width: '100%', 
+            height: 'auto', 
+            maxHeight: '200px', // Aplica la altura máxima deseada
+            objectFit: 'cover' 
+          }}
+        />
+      ))}
+    </div>
   );
-
-  return bannerSeleccionado ? <>
-      <div className="mb-4">
-          <img
-              src={bannerSeleccionado.imagen}
-              alt={`Promoción para categoría ${categoriaId}`}
-              className="img-fluid w-100"
-              style={{
-                  maxHeight: '200px',
-                  objectFit: 'cover',
-                  borderRadius: '5px',
-              }}
-          />
-      </div>
-      </> : null;
 };
 
 export default BannerPromocion;

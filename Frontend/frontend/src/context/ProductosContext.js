@@ -1,4 +1,4 @@
-// src/context/ProductosContext.js
+
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -9,10 +9,10 @@ export const ProductosProvider = ({ children }) => {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
-  // Base URL para las peticiones a la API
+
   const Backend = 'http://localhost:3000';
 
-  // Obtener todos los productos una vez que se monta el componente
+
   useEffect(() => {
     obtenerProductos();
   }, []);
@@ -30,7 +30,7 @@ export const ProductosProvider = ({ children }) => {
     }
   };
 
-  // Crear un nuevo producto
+
   const crearProducto = async (nuevoProducto) => {
     try {
       const respuesta = await axios.post(`${Backend}/productos`, nuevoProducto);
@@ -40,7 +40,7 @@ export const ProductosProvider = ({ children }) => {
     }
   };
 
-  // Obtener un producto por ID
+
   const obtenerProductoPorId = async (id) => {
     try {
       const respuesta = await axios.get(`${Backend}/productos/${id}`);
@@ -50,7 +50,7 @@ export const ProductosProvider = ({ children }) => {
     }
   };
 
-  // Actualizar un producto existente
+
   const actualizarProducto = async (id, productoActualizado) => {
     try {
       await axios.put(`${Backend}/productos/${id}`, productoActualizado);
@@ -61,7 +61,7 @@ export const ProductosProvider = ({ children }) => {
     }
   };
 
-  // Eliminar un producto
+
   const eliminarProducto = async (id) => {
     try {
       await axios.delete(`${Backend}/productos/${id}`);
@@ -71,7 +71,7 @@ export const ProductosProvider = ({ children }) => {
     }
   };
 
-  // Obtener todos los productos de una determinada categoría
+
   const obtenerProductosPorCategoria = async (categoria_id) => {
     try {
       const respuesta = await axios.get(`${Backend}/productos/categoria/${categoria_id}`);

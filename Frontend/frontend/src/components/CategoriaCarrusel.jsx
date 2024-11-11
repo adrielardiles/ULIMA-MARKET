@@ -6,10 +6,12 @@ import CarrucelControles from './CarrucelControles';
 import ContenidoCarrusel from './ContenidoCarrusel';
 
 const CategoriaCarrusel = ({ productos }) => {
-
-  const categorias = [...new Set(productos.map(producto => producto.categoria))];
   const [grupoActivoPorCategoria, setGrupoActivoPorCategoria] = useState({});
 
+  // Agrupar productos por categoría
+  const categorias = productos.length > 0 
+    ? [...new Set(productos.map(producto => producto.categoriaId))]  // Únicamente categorías
+    : [];
 
   const dividirEnGrupos = (productos, cantidadPorGrupo = 3) => {
     const grupos = [];
@@ -19,14 +21,12 @@ const CategoriaCarrusel = ({ productos }) => {
     return grupos;
   };
 
-
   const manejarSiguiente = (categoria, totalGrupos) => {
     setGrupoActivoPorCategoria(prev => ({
       ...prev,
       [categoria]: ((prev[categoria] || 0) + 1) % totalGrupos
     }));
   };
-
 
   const manejarAnterior = (categoria, totalGrupos) => {
     setGrupoActivoPorCategoria(prev => ({
@@ -37,32 +37,36 @@ const CategoriaCarrusel = ({ productos }) => {
     }));
   };
 
-  return <>
+  return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-      {categorias.map((categoria, index) => {
-        const productosPorCategoria = productos.filter(producto => producto.categoria === categoria);
+      {categorias.map((categoriaId) => {
+        // Filtrar productos por categoría
+        const productosPorCategoria = productos.filter(producto => producto.categoriaId === categoriaId);
+        if (productosPorCategoria.length === 0) return null; // Evitar renderizado si no hay productos para la categoría
+
+        // Dividir en grupos de productos
         const grupos = dividirEnGrupos(productosPorCategoria);
-        const grupoActivo = grupoActivoPorCategoria[categoria] || 0;
+        const grupoActivo = grupoActivoPorCategoria[categoriaId] || 0;
 
         return (
-          <div key={index} className="categoria-carrusel my-4">
+          <div key={categoriaId} className="categoria-carrusel my-4">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h3>{categoria}</h3>
-              <Link to={`/mostrarTodo/${encodeURIComponent(categoria)}`} style={{ color: 'orange', textDecoration: 'underline' }}>
+              <h3>{productosPorCategoria[0].categoriaNombre || 'Categoría Desconocida'}</h3> 
+              <Link to={`/mostrarTodo/${encodeURIComponent(categoriaId)}`} style={{ color: 'orange', textDecoration: 'underline' }}>
                 Ver Todos
               </Link>
             </div>
-            <BannerPromocion categoriaId={categoria.toLowerCase().replace(/\s/g, '')} />
+            <BannerPromocion categoriaId={categoriaId} />
             <div className="carousel" style={{ margin: '0 auto', padding: '20px 0', position: 'relative' }}>
               <ContenidoCarrusel grupos={grupos} grupoActivo={grupoActivo}>
-                {grupos[grupoActivo].map(producto => (
+                {grupos[grupoActivo] && grupos[grupoActivo].map(producto => (
                   <ProductoResumido key={producto.id} producto={producto} />
                 ))}
               </ContenidoCarrusel>
               {grupos.length > 1 && (
                 <CarrucelControles
-                  onSiguiente={() => manejarSiguiente(categoria, grupos.length)}
-                  onAnterior={() => manejarAnterior(categoria, grupos.length)}
+                  onSiguiente={() => manejarSiguiente(categoriaId, grupos.length)}
+                  onAnterior={() => manejarAnterior(categoriaId, grupos.length)}
                 />
               )}
             </div>
@@ -70,7 +74,7 @@ const CategoriaCarrusel = ({ productos }) => {
         );
       })}
     </div>
-    </>
+  );
 };
 
 export default CategoriaCarrusel;

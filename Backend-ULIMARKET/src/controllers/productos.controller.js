@@ -1,7 +1,7 @@
 import Producto from "../dao/Producto.js";
 import Categoria from "../dao/Categoria.js";
 
-// Crear un nuevo producto
+
 export const crearProducto = async (req, res) => {
   const { nombre, descripcion, precio, imagen, stock, categoria_id } = req.body;
 
@@ -26,11 +26,11 @@ export const crearProducto = async (req, res) => {
   }
 };
 
-// Obtener todos los productos
+
 export const obtenerProductos = async (req, res) => {
   try {
     const productos = await Producto.findAll({
-      include: Categoria, // Incluir información de la categoría asociada
+      include: Categoria, 
     });
     res.status(200).json(productos);
   } catch (error) {
@@ -38,13 +38,13 @@ export const obtenerProductos = async (req, res) => {
   }
 };
 
-// Obtener un producto por ID
+
 export const obtenerProductoPorId = async (req, res) => {
   const { id } = req.params;
 
   try {
     const producto = await Producto.findByPk(id, {
-      include: Categoria, // Incluir información de la categoría asociada
+      include: Categoria, 
     });
 
     if (!producto) {

@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     { path: "/register", element: <RegisterPage /> },
     { path: "/login", element: <LoginPage /> },
     { path: "/recuperar-contraseña", element: <RecuperarCuenta /> },
-    { path: "/producto/:productId", element: <ProductoPage /> },
+    { path: "/productoPage", element: <ProductoPage /> }, 
     { path: "/mostrarTodo/:categoriaId", element: <VerTodosPage /> },
     { path: "/pagarTotal", element: <PagarTotal/> }
 ]);

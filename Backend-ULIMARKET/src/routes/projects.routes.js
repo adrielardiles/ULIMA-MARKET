@@ -8,6 +8,7 @@ import * as CategoriaController from '../controllers/categoria.controller.js';
 import * as PromocionController from '../controllers/promocion.controller.js';
 import * as metodoPago from "../controllers/metodoPago.controller.js";
 import * as direccion from "../controllers/direccion.controller.js";
+import * as banner from "../controllers/banner.controller.js"
 
 const router = express.Router();
 
@@ -89,6 +90,8 @@ router.put("/direccion/:id", direccion.actualizarDireccion);
 router.delete("/direccion/:id", direccion.eliminarDireccion);
 
 
+router.get('/banners/categoria/:categoria_id', banner.obtenerBannerPorCategoriaId);
+router.post('/banners', banner.crearBanner);
 
 
 
