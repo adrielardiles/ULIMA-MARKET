@@ -3,7 +3,7 @@ import Producto from "../dao/Producto.js";
 import Usuario from "../dao/Usuario.js";
 import PedidoProductos from "../dao/PedidoProductos.js";
 
-// Crear un nuevo pedido
+
 export const crearPedido = async (req, res) => {
   const { usuario_id, productos } = req.body;
 
@@ -40,7 +40,7 @@ export const crearPedido = async (req, res) => {
   }
 };
 
-// Obtener todos los pedidos
+
 export const obtenerPedidos = async (req, res) => {
   try {
     const pedidos = await Pedido.findAll({ include: [Usuario, Producto] });
@@ -50,7 +50,7 @@ export const obtenerPedidos = async (req, res) => {
   }
 };
 
-// Obtener un pedido por ID
+
 export const obtenerPedidoPorId = async (req, res) => {
   const { id } = req.params;
   try {
@@ -64,7 +64,7 @@ export const obtenerPedidoPorId = async (req, res) => {
   }
 };
 
-// Actualizar un pedido
+
 export const actualizarPedido = async (req, res) => {
   const { id } = req.params;
   const { estaCancelado } = req.body;
@@ -84,7 +84,7 @@ export const actualizarPedido = async (req, res) => {
   }
 };
 
-// Eliminar un pedido
+
 export const eliminarPedido = async (req, res) => {
   const { id } = req.params;
 
@@ -103,10 +103,10 @@ export const eliminarPedido = async (req, res) => {
   }
 };
 
-// Actualizar estado de cancelación del pedido
+
 export const actualizarEstadoPedido = async (req, res) => {
   const { id } = req.params;
-  const { estaCancelado } = req.body; // Recibimos el estado de cancelación
+  const { estaCancelado } = req.body; 
 
   try {
     const pedido = await Pedido.findByPk(id);
@@ -114,7 +114,7 @@ export const actualizarEstadoPedido = async (req, res) => {
       return res.status(404).json({ error: "Pedido no encontrado" });
     }
 
-    // Actualizamos el estado de cancelación si se proporciona
+
     pedido.estaCancelado = estaCancelado !== undefined ? estaCancelado : pedido.estaCancelado;
 
     await pedido.save();

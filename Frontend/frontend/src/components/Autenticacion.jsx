@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ModificarContrasena from './ModificarContrasena';
 import ModificarCorreo from './ModificarCorreo';
 
-// Datos simulados
+
 const datosAutenticacion = {
     contrasena: 'miContrasena123',
     correo: '20211617@aloe.ulima.edu.pe',

@@ -11,7 +11,7 @@ const EntradaDatos = ({ label, tipo, valor, setValor, placeholder, id, isPasswor
                 {label}
             </label>
             <input
-                type={isPassword ? "password" : tipo} // Soporta diferentes tipos
+                type={isPassword ? "password" : tipo} 
                 className="form-control"
                 id={id}
                 placeholder={placeholder}

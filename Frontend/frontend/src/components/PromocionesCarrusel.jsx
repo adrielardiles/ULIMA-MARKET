@@ -37,7 +37,6 @@ const PromocionesCarrusel = ({ promociones }) => {
         ))}
       </div>
 
-      {/* Indicadores */}
       <div className="carousel-indicators">
         {promociones.map((_, index) => (
           <button

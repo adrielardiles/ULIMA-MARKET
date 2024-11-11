@@ -4,7 +4,7 @@ import ListaSeleccionable from '../components/ListaSeleccionable';
 import VerDetallesPopup from '../components/VerDetallesPopUp';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { useCarrito } from '../context/CarritoContext'; // Importa el contexto del carrito
+import { useCarrito } from '../context/CarritoContext';
 
 const PagarTotal = () => {
   const [metodoSeleccionado, setMetodoSeleccionado] = useState(null);

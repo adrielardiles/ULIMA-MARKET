@@ -13,7 +13,6 @@ const AgregarMetodoPago = ({ agregarMetodo }) => {
     const manejarEnvio = (e) => {
         e.preventDefault();
         agregarMetodo({ numeroTarjeta, nombrePropietario, validoHasta, cve, ...direccion });
-        // Resetea los campos después de agregar
         setNumeroTarjeta('');
         setNombrePropietario('');
         setValidoHasta('');

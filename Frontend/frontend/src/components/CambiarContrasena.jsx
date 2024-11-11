@@ -15,7 +15,7 @@ const CambiarContrasena = ({ manejarContrasenaCambiada }) => {
             manejarContrasenaCambiada();
             setNuevaContrasena("");
             setConfirmarContrasena("");
-            setMensajeError(""); // Limpia cualquier mensaje de error existente
+            setMensajeError(""); 
         } else {
             setMensajeError("Las contraseñas no coinciden.");
         }

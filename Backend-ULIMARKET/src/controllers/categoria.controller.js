@@ -1,6 +1,6 @@
 import Categoria from "../dao/Categoria.js";
 
-// Obtener todas las categorías
+
 export const obtenerCategorias = async (req, res) => {
   try {
     const categorias = await Categoria.findAll();
@@ -10,7 +10,7 @@ export const obtenerCategorias = async (req, res) => {
   }
 };
 
-// Obtener una categoría por ID
+
 export const obtenerCategoriaPorId = async (req, res) => {
   const { id } = req.params;
   try {
@@ -24,7 +24,7 @@ export const obtenerCategoriaPorId = async (req, res) => {
   }
 };
 
-// Crear nueva categoría
+
 export const crearCategoria = async (req, res) => {
   const { nombre } = req.body;
   try {
@@ -35,7 +35,7 @@ export const crearCategoria = async (req, res) => {
   }
 };
 
-// Actualizar una categoría
+
 export const actualizarCategoria = async (req, res) => {
   const { id } = req.params;
   const { nombre } = req.body;
@@ -57,7 +57,7 @@ export const actualizarCategoria = async (req, res) => {
   }
 };
 
-// Eliminar una categoría
+
 export const eliminarCategoria = async (req, res) => {
   const { id } = req.params;
   try {

@@ -1,18 +1,18 @@
 import MetodoPago from "../dao/MetodoPago.js";
 import Usuario from "../dao/Usuario.js";
 
-// Crear método de pago
+
 export const crearMetodoPago = async (req, res) => {
   try {
     const { usuario_id, pais_id, departamento_id, provincia_id, distrito_id } = req.body;
 
-    // Validar si el usuario existe
+
     const usuario = await Usuario.findByPk(usuario_id);
     if (!usuario) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
-    // Crear el método de pago
+
     const metodoPago = await MetodoPago.create(req.body);
     res.status(201).json({ message: "Método de pago creado correctamente", metodoPago });
   } catch (error) {
@@ -20,7 +20,7 @@ export const crearMetodoPago = async (req, res) => {
   }
 };
 
-// Obtener métodos de pago de un usuario
+
 export const obtenerMetodosPago = async (req, res) => {
   try {
     const { usuario_id } = req.params;
@@ -31,7 +31,7 @@ export const obtenerMetodosPago = async (req, res) => {
   }
 };
 
-// Obtener un método de pago específico por ID
+
 export const obtenerMetodoPagoPorId = async (req, res) => {
   try {
     const { id } = req.params;
@@ -45,7 +45,7 @@ export const obtenerMetodoPagoPorId = async (req, res) => {
   }
 };
 
-// Actualizar método de pago
+
 export const actualizarMetodoPago = async (req, res) => {
   const { id } = req.params;
   const { Numero, Propietario, CVE, valido_hasta, pais_id, departamento_id, provincia_id, distrito_id } = req.body;
@@ -56,7 +56,7 @@ export const actualizarMetodoPago = async (req, res) => {
       return res.status(404).json({ error: "Método de pago no encontrado" });
     }
 
-    // Actualizar el método de pago
+
     await metodoPago.update({
       Numero: Numero ?? metodoPago.Numero,
       Propietario: Propietario ?? metodoPago.Propietario,
@@ -74,7 +74,7 @@ export const actualizarMetodoPago = async (req, res) => {
   }
 };
 
-// Eliminar un método de pago
+
 export const eliminarMetodoPago = async (req, res) => {
   const { id } = req.params;
 
@@ -84,7 +84,7 @@ export const eliminarMetodoPago = async (req, res) => {
       return res.status(404).json({ error: "Método de pago no encontrado" });
     }
 
-    // Eliminar el método de pago
+
     await metodoPago.destroy();
     res.status(200).json({ message: "Método de pago eliminado correctamente" });
   } catch (error) {

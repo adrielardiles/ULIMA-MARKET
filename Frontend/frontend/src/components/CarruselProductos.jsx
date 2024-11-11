@@ -4,7 +4,7 @@ import ProductoResumido from './ProductoResumido';
 const CarruselProductos = ({ productos }) => {
   const [grupoActivo, setGrupoActivo] = useState(0);
 
-  // Dividir productos en grupos de 3 y memorizar el resultado para evitar cálculos repetidos
+
   const grupos = useMemo(() => {
     const cantidadPorGrupo = 3;
     const gruposCalculados = [];

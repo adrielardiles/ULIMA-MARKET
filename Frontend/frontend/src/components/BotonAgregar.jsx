@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useCarrito } from '../context/CarritoContext';
 
 const BotonAgregar = ({ producto }) => {
-  const { agregarProducto } = useCarrito(); // Obtener la función para agregar producto al carrito
+  const { agregarProducto } = useCarrito(); 
   const [mostrarCantidad, setMostrarCantidad] = useState(false);
   const [cantidad, setCantidad] = useState(1);
 
@@ -26,9 +26,7 @@ const BotonAgregar = ({ producto }) => {
   };
 
   const confirmarAgregarProducto = () => {
-    // Agregar el producto al carrito con la cantidad actual
     agregarProducto({ ...producto, cantidad });
-    // Opcionalmente, puedes ocultar la sección de cantidad
     setMostrarCantidad(false);
   };
 
@@ -57,7 +55,7 @@ const BotonAgregar = ({ producto }) => {
           </button>
           <button
             className="btn btn-primary"
-            onClick={confirmarAgregarProducto} // Llamar a la función confirmación
+            onClick={confirmarAgregarProducto}
             style={{ marginLeft: '10px' }}
           >
             Confirmar

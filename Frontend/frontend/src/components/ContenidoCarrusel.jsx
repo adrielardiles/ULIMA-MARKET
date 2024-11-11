@@ -3,7 +3,7 @@ import ProductoResumido from './ProductoResumido';
 
 const ContenidoCarrusel = ({ grupos, grupoActivo }) => {
   if (!grupos || grupos.length === 0) {
-    return null; // No renderiza nada si no hay grupos
+    return null; 
   }
 
   return <>

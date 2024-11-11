@@ -1,6 +1,6 @@
 import Direccion from "../dao/Direccion.js";
 
-// Crear dirección
+
 export const crearDireccion = async (req, res) => {
   try {
     const { pais_id, departamento_id, provincia_id, distrito_id, calle, numero, informacionAdicional, usuario_id } = req.body;
@@ -20,7 +20,7 @@ export const crearDireccion = async (req, res) => {
   }
 };
 
-// Obtener todas las direcciones de un usuario
+
 export const obtenerDirecciones = async (req, res) => {
   try {
     const { usuario_id } = req.params;
@@ -31,7 +31,7 @@ export const obtenerDirecciones = async (req, res) => {
   }
 };
 
-// Obtener una dirección específica por ID
+
 export const obtenerDireccionPorId = async (req, res) => {
   try {
     const { id } = req.params;
@@ -45,7 +45,7 @@ export const obtenerDireccionPorId = async (req, res) => {
   }
 };
 
-// Actualizar una dirección
+
 export const actualizarDireccion = async (req, res) => {
   try {
     const { id } = req.params;
@@ -72,7 +72,6 @@ export const actualizarDireccion = async (req, res) => {
   }
 };
 
-// Eliminar una dirección
 export const eliminarDireccion = async (req, res) => {
   try {
     const { id } = req.params;
