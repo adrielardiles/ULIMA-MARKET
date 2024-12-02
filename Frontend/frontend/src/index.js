@@ -5,7 +5,7 @@ import { RouterProvider } from 'react-router-dom';
 import router from './routes';
 import { AuthProvider } from './context/AuthContext';
 import { CarritoProvider } from './context/CarritoContext';
-import { ProductosProvider } from './context/ProductosContext'; // Importa ProductosProvider
+import { ProductosProvider } from './context/ProductosContext'; 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

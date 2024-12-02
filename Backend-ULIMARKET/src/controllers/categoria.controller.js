@@ -27,11 +27,12 @@ export const obtenerCategoriaPorId = async (req, res) => {
 
 export const crearCategoria = async (req, res) => {
   const { nombre } = req.body;
+
   try {
-    const categoria = await Categoria.create({ nombre });
-    res.status(201).json(categoria);
+      const categoria = await Categoria.create({ nombre });
+      res.status(201).json(categoria);
   } catch (error) {
-    res.status(500).json({ error: 'Error al crear la categoría' });
+      res.status(500).json({ error: "Error al crear la categoría", detalle: error.message });
   }
 };
 

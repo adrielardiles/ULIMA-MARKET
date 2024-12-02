@@ -7,16 +7,16 @@ const ProductoResumido = ({ producto }) => {
 
   const manejarClick = async () => {
     try {
-      // Realizar el fetch para obtener los productos relacionados por categoría
+
       const respuesta = await fetch(`http://localhost:3000/productos/categoria/1`);
       if (!respuesta.ok) {
         throw new Error('Error al obtener productos relacionados');
       }
       const data = await respuesta.json();
-      // Filtramos el producto actual para que no se incluya en los productos relacionados
+
       const productosFiltrados = data.filter(p => p.id !== producto.id);
 
-      // Redirigir a la página del producto con los datos relacionados como props
+
       navigate(`/productoPage`, {
         state: {
           productoSeleccionado: producto,

@@ -17,7 +17,7 @@ import  sequelize  from './database/database.js';
 
 async function main () {
     try {
-        await sequelize.sync({alter : true})
+        await sequelize.sync({force : false})
         console.log('Connection has been established successfully.');
         app.listen(3000)
         console.log('Connection has worked.', 3000);

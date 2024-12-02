@@ -1,34 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const EntradaDatos = ({ label, tipo, valor, setValor, placeholder, id, isPassword, required }) => {
-    const valueOnChange = (evt) => {
-        setValor(evt.target.value);
+const EntradaDatos = ({ label, tipo, valor, setValor, placeholder }) => {
+    const [error, setError] = useState('');
+
+    const validarEmail = (email) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
     };
 
-    return <>
-        <div className="mb-3">
-            <label htmlFor={id} className="form-label">
-                {label}
-            </label>
-            <input
-                type={isPassword ? "password" : tipo} 
-                className="form-control"
-                id={id}
-                placeholder={placeholder}
-                onChange={valueOnChange}
-                value={valor}
-                required={required}
-            />
-        </div>
-        </>
-};
+    const valueOnChange = (evt) => {
+        const nuevoValor = evt.target.value;
+        setValor(nuevoValor);
 
-EntradaDatos.defaultProps = {
-    tipo: "text", 
-    placeholder: "",
-    id: "txt_value", 
-    isPassword: false,
-    required: false,
+        if (tipo === 'email') {
+            if (!validarEmail(nuevoValor)) {
+                setError('El formato del email no es válido.');
+            } else {
+                setError('');
+            }
+        } else {
+            setError('');
+        }
+    };
+
+    return (
+        <>
+            <div className="mb-3">
+                <label className="form-label">
+                    {label}
+                </label>
+                <input
+                    type={tipo}
+                    className="form-control"
+                    placeholder={placeholder}
+                    onChange={valueOnChange}
+                    value={valor}
+                    required
+                />
+                {error && <div className="text-danger mt-2">{error}</div>}
+            </div>
+        </>
+    );
 };
 
 export default EntradaDatos;

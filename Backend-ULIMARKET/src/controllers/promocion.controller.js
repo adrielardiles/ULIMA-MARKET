@@ -1,12 +1,12 @@
 import  Promocion  from "../dao/Promociones.js";
 import Categoria  from "../dao/Categoria.js";
 
-// Crear una nueva promoción
+
 export const crearPromocion = async (req, res) => {
   const { imagen, categoria_id } = req.body;
 
   try {
-    // Verificar si la categoría existe
+
     const categoria = await Categoria.findByPk(categoria_id);
     if (!categoria) {
       return res.status(404).json({ error: "Categoría no encontrada" });
@@ -23,7 +23,7 @@ export const crearPromocion = async (req, res) => {
   }
 };
 
-// Obtener todas las promociones
+
 export const obtenerPromociones = async (req, res) => {
   try {
     const promociones = await Promocion.findAll({
@@ -35,7 +35,7 @@ export const obtenerPromociones = async (req, res) => {
   }
 };
 
-// Obtener una promoción específica por ID
+
 export const obtenerPromocionPorId = async (req, res) => {
   const { id } = req.params;
 
@@ -54,7 +54,7 @@ export const obtenerPromocionPorId = async (req, res) => {
   }
 };
 
-// Actualizar una promoción específica
+
 export const actualizarPromocion = async (req, res) => {
   const { id } = req.params;
   const { imagen, categoria_id } = req.body;
@@ -82,7 +82,7 @@ export const actualizarPromocion = async (req, res) => {
   }
 };
 
-// Eliminar una promoción específica
+
 export const eliminarPromocion = async (req, res) => {
   const { id } = req.params;
 
@@ -99,18 +99,18 @@ export const eliminarPromocion = async (req, res) => {
   }
 };
 
-// Obtener promociones por categoría
+
 export const obtenerPromocionesPorCategoria = async (req, res) => {
   const { categoria_id } = req.params;
 
   try {
-    // Verificar si la categoría existe
+
     const categoria = await Categoria.findByPk(categoria_id);
     if (!categoria) {
       return res.status(404).json({ error: "Categoría no encontrada" });
     }
 
-    // Buscar promociones relacionadas con la categoría especificada
+
     const promociones = await Promocion.findAll({
       where: { categoria_id },
       include: Categoria,

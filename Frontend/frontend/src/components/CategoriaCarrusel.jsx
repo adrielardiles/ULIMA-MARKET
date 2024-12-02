@@ -8,9 +8,8 @@ import ContenidoCarrusel from './ContenidoCarrusel';
 const CategoriaCarrusel = ({ productos }) => {
   const [grupoActivoPorCategoria, setGrupoActivoPorCategoria] = useState({});
 
-  // Agrupar productos por categoría
   const categorias = productos.length > 0 
-    ? [...new Set(productos.map(producto => producto.categoriaId))]  // Únicamente categorías
+    ? [...new Set(productos.map(producto => producto.categoriaId))]  
     : [];
 
   const dividirEnGrupos = (productos, cantidadPorGrupo = 3) => {
@@ -40,11 +39,10 @@ const CategoriaCarrusel = ({ productos }) => {
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
       {categorias.map((categoriaId) => {
-        // Filtrar productos por categoría
-        const productosPorCategoria = productos.filter(producto => producto.categoriaId === categoriaId);
-        if (productosPorCategoria.length === 0) return null; // Evitar renderizado si no hay productos para la categoría
 
-        // Dividir en grupos de productos
+        const productosPorCategoria = productos.filter(producto => producto.categoriaId === categoriaId);
+        if (productosPorCategoria.length === 0) return null; 
+
         const grupos = dividirEnGrupos(productosPorCategoria);
         const grupoActivo = grupoActivoPorCategoria[categoriaId] || 0;
 

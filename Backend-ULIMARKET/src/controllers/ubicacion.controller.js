@@ -3,15 +3,14 @@ import { Departamento } from "../dao/Departamento.js";
 import { Provincia } from "../dao/Provincia.js";
 import { Distrito } from "../dao/Distrito.js";
 
-// CRUD para Países
 
 export const crearPaises = async (req, res) => {
-  const { paises } = req.body; // Se espera que `paises` sea una lista de objetos
+  const { paises } = req.body; 
   try {
     await Promise.all(
       paises.map(async (pais) => await Pais.create(pais))
     );
-    res.status(201).json({ error: "" }); // Respuesta modificada
+    res.status(201).json({ error: "" }); 
   } catch (error) {
     res.status(500).json({ error: "Error al crear los países", detalle: error.message });
   }
@@ -26,15 +25,15 @@ export const obtenerPaises = async (req, res) => {
   }
 };
 
-// CRUD para Departamentos
+
 
 export const crearDepartamentos = async (req, res) => {
-  const { departamentos } = req.body; // Se espera que `departamentos` sea una lista de objetos
+  const { departamentos } = req.body; 
   try {
     await Promise.all(
       departamentos.map(async (departamento) => await Departamento.create(departamento))
     );
-    res.status(201).json({ error: "" }); // Respuesta modificada
+    res.status(201).json({ error: "" }); 
   } catch (error) {
     res.status(500).json({ error: "Error al crear los departamentos", detalle: error.message });
   }
@@ -49,15 +48,15 @@ export const obtenerDepartamentos = async (req, res) => {
   }
 };
 
-// CRUD para Provincias
+
 
 export const crearProvincias = async (req, res) => {
-  const { provincias } = req.body; // Se espera que `provincias` sea una lista de objetos
+  const { provincias } = req.body; 
   try {
     await Promise.all(
       provincias.map(async (provincia) => await Provincia.create(provincia))
     );
-    res.status(201).json({ error: "" }); // Respuesta modificada
+    res.status(201).json({ error: "" }); 
   } catch (error) {
     res.status(500).json({ error: "Error al crear las provincias", detalle: error.message });
   }
@@ -72,15 +71,14 @@ export const obtenerProvincias = async (req, res) => {
   }
 };
 
-// CRUD para Distritos
 
 export const crearDistritos = async (req, res) => {
-  const { distritos } = req.body; // Se espera que `distritos` sea una lista de objetos
+  const { distritos } = req.body; 
   try {
     await Promise.all(
       distritos.map(async (distrito) => await Distrito.create(distrito))
     );
-    res.status(201).json({ error: "" }); // Respuesta modificada
+    res.status(201).json({ error: "" });
   } catch (error) {
     res.status(500).json({ error: "Error al crear los distritos", detalle: error.message });
   }

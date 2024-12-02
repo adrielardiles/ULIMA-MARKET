@@ -1,6 +1,6 @@
 import Banner from '../dao/Banner.js'; 
 
-// Obtener banner por categoria_id
+
 export const obtenerBannerPorCategoriaId = async (req, res) => {
     try {
         const { categoria_id } = req.params;
@@ -14,7 +14,7 @@ export const obtenerBannerPorCategoriaId = async (req, res) => {
     }
 };
 
-// Crear un nuevo banner
+
 export const crearBanner = async (req, res) => {
     try {
         const { imagen, categoria_id } = req.body;

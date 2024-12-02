@@ -33,19 +33,19 @@ const MetodoPago = sequelize.define('MetodoPago', {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    pais_id: { // Nueva clave foránea para relacionarse con Pais
+    pais_id: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    departamento_id: { // Nueva clave foránea para relacionarse con Departamento
+    departamento_id: { 
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    provincia_id: { // Nueva clave foránea para relacionarse con Provincia
+    provincia_id: { 
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    distrito_id: { // Nueva clave foránea para relacionarse con Distrito
+    distrito_id: {
       type: DataTypes.INTEGER,
       allowNull: false
     }

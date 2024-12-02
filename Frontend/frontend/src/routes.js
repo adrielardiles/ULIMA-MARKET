@@ -12,6 +12,7 @@ import ProductoPage from './pages/ProductoPage';
 import VerTodosPage from './pages/VerTodosPage';
 import LandingPage from './pages/LadingPage';
 import PagarTotal from './pages/PagarTotal';
+import DashBoard from './pages/adminPage'
 
 const router = createBrowserRouter([
     { path: "/", element: <LandingPage /> },
@@ -25,7 +26,8 @@ const router = createBrowserRouter([
     { path: "/recuperar-contraseña", element: <RecuperarCuenta /> },
     { path: "/productoPage", element: <ProductoPage /> }, 
     { path: "/mostrarTodo/:categoriaId", element: <VerTodosPage /> },
-    { path: "/pagarTotal", element: <PagarTotal/> }
+    { path: "/pagarTotal", element: <PagarTotal/> },
+    { path: "/admin-dashboard", element: <DashBoard/> },
 ]);
 
 export default router;

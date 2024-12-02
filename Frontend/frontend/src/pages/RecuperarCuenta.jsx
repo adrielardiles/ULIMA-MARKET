@@ -7,60 +7,53 @@ import IngresarCodigo from "../components/IngresarCodigo";
 import CambiarContrasena from "../components/CambiarContrasena";
 
 const RecuperarCuenta = () => {
-    const [etapa, setEtapa] = useState("ingresarCodigo");
-    const [codigoCorrecto, setCodigoCorrecto] = useState("1234");
-    const [codigoIngresado, setCodigoIngresado] = useState("");
-    const [mostrarModal, setMostrarModal] = useState(false);
-    const [mensajeModal, setMensajeModal] = useState("");
+    const [etapa, setEtapa] = useState("ingresarCodigo"); 
+    const [email, setEmail] = useState(""); 
+    const [codigoCorrecto, setCodigoCorrecto] = useState(""); 
     const navigate = useNavigate();
 
+    const manejarCodigoGenerado = (codigo, correo) => {
+        setCodigoCorrecto(codigo);
+        setEmail(correo); 
+    };
+    
+
     const manejarCodigoIngresado = (codigo) => {
-        setCodigoIngresado(codigo);
         if (codigo === codigoCorrecto) {
             setEtapa("cambiarContrasena");
         } else {
-            setMensajeModal("El código ingresado es incorrecto.");
-            setMostrarModal(true);
+            alert("El código ingresado es incorrecto.");
         }
     };
 
     const manejarContrasenaCambiada = () => {
-        setMensajeModal("Contraseña cambiada con éxito.");
-        setMostrarModal(true);
-        setTimeout(() => {
-            navigate("/");
-        }, 1000); 
+        alert("Contraseña cambiada con éxito.");
+        navigate("/");
     };
 
-    return <>
-        <Header/>
-        <div className="container mt-5">
-            {etapa === "ingresarCodigo" ? (
-                <IngresarCodigo
-                    manejarCodigoIngresado={manejarCodigoIngresado}
-                    reenviarCodigo={() => {
-                        setMensajeModal("Código reenviado al correo electrónico proporcionado.");
-                        setMostrarModal(true);
-                    }}
-                />
-            ) : (
-                <CambiarContrasena manejarContrasenaCambiada={manejarContrasenaCambiada} />
-            )}
+    return (
+        <>
+            <Header />
+            <div className="container mt-5 mb-5">
+                {etapa === "ingresarCodigo" ? (
+                    <IngresarCodigo
+                        manejarCodigoIngresado={manejarCodigoIngresado}
+                        manejarCodigoGenerado={(codigo, correo) => manejarCodigoGenerado(codigo, correo)} 
+                        reenviarCodigo={() =>
+                            alert("Código reenviado al correo electrónico proporcionado.")
+                        }
+                    />
 
-            <Modal show={mostrarModal} onHide={() => setMostrarModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Mensaje</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{mensajeModal}</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setMostrarModal(false)}>
-                        Cerrar
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        </div>
-        <Footer />
-    </>
+                ) : (
+                    <CambiarContrasena
+                        manejarContrasenaCambiada={manejarContrasenaCambiada}
+                        email={email}
+                    />
+                )}
+            </div>
+            <Footer />
+        </>
+    );
 };
 
 export default RecuperarCuenta;

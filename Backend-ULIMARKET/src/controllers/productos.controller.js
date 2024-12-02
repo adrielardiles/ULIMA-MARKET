@@ -3,28 +3,29 @@ import Categoria from "../dao/Categoria.js";
 
 
 export const crearProducto = async (req, res) => {
-  const { nombre, descripcion, precio, imagen, stock, categoria_id } = req.body;
+    const { nombre, descripcion, precio, imagen, stock, categoria_id } = req.body;
 
-  try {
-    const categoria = await Categoria.findByPk(categoria_id);
-    if (!categoria) {
-      return res.status(404).json({ error: "Categoría no encontrada" });
+    try {
+        const categoria = await Categoria.findByPk(categoria_id);
+        if (!categoria) {
+            return res.status(404).json({ error: "Categoría no encontrada" });
+        }
+
+        const producto = await Producto.create({
+            nombre,
+            descripcion,
+            precio,
+            imagen,
+            stock,
+            categoria_id,
+        });
+
+        res.status(201).json(producto);
+    } catch (error) {
+        res.status(500).json({ error: "Error al crear el producto", detalle: error.message });
     }
-
-    const producto = await Producto.create({
-      nombre,
-      descripcion,
-      precio,
-      imagen,
-      stock,
-      categoria_id,
-    });
-
-    res.status(201).json(producto);
-  } catch (error) {
-    res.status(500).json({ error: "Error al crear el producto", detalle: error.message });
-  }
 };
+
 
 
 export const obtenerProductos = async (req, res) => {
@@ -57,7 +58,7 @@ export const obtenerProductoPorId = async (req, res) => {
   }
 };
 
-// Actualizar un producto
+
 export const actualizarProducto = async (req, res) => {
   const { id } = req.params;
   const { nombre, descripcion, precio, imagen, stock, categoria_id } = req.body;
@@ -87,7 +88,7 @@ export const actualizarProducto = async (req, res) => {
   }
 };
 
-// Eliminar un producto
+
 export const eliminarProducto = async (req, res) => {
   const { id } = req.params;
 
@@ -105,21 +106,21 @@ export const eliminarProducto = async (req, res) => {
 };
 
 
-// Obtener productos por categoría
+
 export const obtenerProductosPorCategoria = async (req, res) => {
   const { categoria_id } = req.params;
 
   try {
-    // Verificar si la categoría existe
+
     const categoria = await Categoria.findByPk(categoria_id);
     if (!categoria) {
       return res.status(404).json({ error: "Categoría no encontrada" });
     }
 
-    // Buscar productos que pertenezcan a la categoría especificada
+ 
     const productos = await Producto.findAll({
       where: { categoria_id },
-      include: Categoria, // Incluir la categoría asociada
+      include: Categoria,
     });
 
     res.status(200).json(productos);

@@ -1,10 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from '../database/database.js'
 
-
-
-
-
 const CodigoVerificacion = sequelize.define('CodigoVerificacion', {
     id: {
       type: DataTypes.INTEGER,

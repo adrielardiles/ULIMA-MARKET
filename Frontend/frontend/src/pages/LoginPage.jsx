@@ -11,27 +11,46 @@ const LoginPage = () => {
     const { iniciarSesion } = useAuth();
     const navigate = useNavigate();
 
-    const loginHandler = async (username, password) => {
-        if (username === "Ulima" && password === "123") {
-            setError("");
-            iniciarSesion({ nombre: username }); 
-            navigate("/"); 
-        } else {
-            setError("Error Login");
+    const loginHandler = async (email, password) => {
+        try {
+            const response = await fetch("http://localhost:3000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+                setError("");
+                iniciarSesion({
+                    email: data.usuario.email,
+                    nombre: data.usuario.nombre,
+                    isAdmin: data.usuario.isAdmin, 
+                });
+                navigate("/");
+            } else {
+                setError(data.message || "Error en el inicio de sesión");
+            }
+        } catch (err) {
+            setError("No se pudo conectar con el servidor.");
         }
     };
+    
 
-    return <>
+    return (
         <>
             <Header />
             <div className="row mt-5 mb-5">
                 <div className="col-md-4"></div>
                 <div className="col-md-4">
                     <LoginFormulario
-                        loginOnClick={loginHandler}
+                        actionOnClick={loginHandler}
                         modo={"login"}
                     />
-                    {error !== "" && (
+                    {error && (
                         <div className="mt-4 alert alert-danger text-center">
                             Email o Contraseña incorrecta
                         </div>
@@ -50,7 +69,7 @@ const LoginPage = () => {
             </div>
             <Footer />
         </>
-    </>
+    );
 };
 
 export default LoginPage;

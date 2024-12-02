@@ -11,7 +11,6 @@ const Header = () => {
   const [mostrarMenuUsuario, setMostrarMenuUsuario] = useState(false);
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
 
-
   const manejarBusqueda = () => {
     if (terminoBusqueda.trim() === '') return;
 
@@ -35,7 +34,6 @@ const Header = () => {
     }
   };
 
-
   const manejarNavegacionPedidos = () => {
     if (usuario) {
       navigate('/perfil');
@@ -43,7 +41,6 @@ const Header = () => {
       navigate('/login');
     }
   };
-
 
   const manejarToggleMenuUsuario = () => {
     setMostrarMenuUsuario(!mostrarMenuUsuario);
@@ -55,9 +52,8 @@ const Header = () => {
     navigate('/');
   };
 
-  return <>
+  return (
     <div>
-
       <div style={{ backgroundColor: '#474747', height: '30px', width: '100%' }}></div>
 
       <div className="header pt-3 border-bottom">
@@ -71,7 +67,6 @@ const Header = () => {
             <img src={`${process.env.PUBLIC_URL}/imagenes/shopcar.png`} alt="Carrito" style={{ width: '40px', height: '40px', marginRight: '10px' }} />
             <h5 style={{ color: '#CE4500' }}>ULIMARKET</h5>
           </div>
-
 
           <div className="search-section d-flex align-items-center position-relative" style={{ width: '500px' }}>
             <input
@@ -110,6 +105,16 @@ const Header = () => {
               <Carrito productos={[]} />
             </div>
 
+            {usuario?.isAdmin && (
+              <div
+                className="mx-3"
+                style={{ cursor: 'pointer', color: '#000000' }}
+                onClick={() => navigate('/admin-dashboard')}
+              >
+                Admin
+              </div>
+            )}
+
             {usuario ? (
               <div
                 style={{ position: 'relative', cursor: 'pointer' }}
@@ -131,14 +136,7 @@ const Header = () => {
                   >
                     <button
                       onClick={manejarCerrarSesion}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        padding: '10px 20px',
-                        cursor: 'pointer',
-                        width: '100%',
-                        textAlign: 'left',
-                      }}
+                      className="bg-none border-none cursor-pointer w-full text-center px-5 py-2"
                     >
                       Cerrar Sesión
                     </button>
@@ -155,7 +153,7 @@ const Header = () => {
         <Categorias />
       </div>
     </div>
-  </>
+  );
 };
 
 export default Header;

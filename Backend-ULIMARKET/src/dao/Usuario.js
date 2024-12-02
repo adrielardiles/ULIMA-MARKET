@@ -16,11 +16,6 @@ const Usuario = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false 
     },
-    usuario: {
-      type: DataTypes.STRING,
-      allowNull: false, 
-      unique: true 
-    },
     password: {
       type: DataTypes.STRING,
       allowNull: false 
@@ -41,12 +36,10 @@ const Usuario = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true
     },
-    fechaNacimiento : {
-      type: DataTypes.DATE,
-      allowNull : false
-    },
-    edad : {
-      type: DataTypes.INTEGER,
+
+
+    email : {
+      type: DataTypes.STRING,
       allowNull : false
    },
 

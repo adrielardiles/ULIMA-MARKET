@@ -42,7 +42,7 @@ const BannerPromocion = ({ categoriaId }) => {
           style={{ 
             width: '100%', 
             height: 'auto', 
-            maxHeight: '200px', // Aplica la altura máxima deseada
+            maxHeight: '200px', 
             objectFit: 'cover' 
           }}
         />

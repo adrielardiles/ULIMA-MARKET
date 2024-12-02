@@ -5,13 +5,13 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-// Función para formatear los productos de manera uniforme
+
 const formatearProductos = (productos) => {
   return productos.map(producto => ({
     id: producto.id,
     nombre: producto.nombre,
     precio: producto.precio,
-    imagen: `${process.env.PUBLIC_URL}${producto.imagen || ''}`, // Asegurar la URL de la imagen
+    imagen: `${process.env.PUBLIC_URL}${producto.imagen || ''}`, 
     categoriaId: producto.categoria_id || producto.categoriaId,
     categoriaNombre: producto.Categoria_Producto?.nombre || producto.categoriaNombre || 'Sin Categoría'
   }));
