@@ -11,7 +11,7 @@ const EntradaDatos = ({ label, tipo, valor, setValor, placeholder, id, readOnly 
                 value={valor}
                 onChange={(e) => setValor(e.target.value)}
                 placeholder={placeholder}
-                readOnly={readOnly} // Aquí se aplica correctamente
+                readOnly={readOnly} 
             />
         </div>
     );
