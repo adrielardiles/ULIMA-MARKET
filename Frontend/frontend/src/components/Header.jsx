@@ -13,27 +13,26 @@ const Header = () => {
 
   const manejarBusqueda = () => {
     if (terminoBusqueda.trim() === '') return;
-
+  
     const categoriasRelacionadas = [
-      { nombre: 'Frutas y Verduras', palabrasClave: ['manzana', 'banana', 'tomate', 'verdura', 'fruta'] },
-      { nombre: 'Carnes y Aves', palabrasClave: ['pollo', 'res', 'carne', 'ave', 'cerdo'] },
-      { nombre: 'Lácteos y Huevos', palabrasClave: ['leche', 'yogurt', 'queso', 'huevo'] },
-      { nombre: 'Bebidas', palabrasClave: ['jugo', 'agua', 'refresco', 'bebida'] },
-      { nombre: 'Snacks y Dulces', palabrasClave: ['chocolate', 'galleta', 'snack', 'dulce'] },
+      { id: 3, nombre: 'Frutas y Verduras', palabrasClave: ['manzana', 'banana', 'tomate', 'verdura', 'fruta'] },
+      { id: 1, nombre: 'Carnes y Aves', palabrasClave: ['pollo', 'res', 'carne', 'ave', 'cerdo'] },
+      { id: 2, nombre: 'Lácteos y Huevos', palabrasClave: ['leche', 'yogurt', 'queso', 'huevo'] },
+      { id: 4, nombre: 'Snacks y Bebidas', palabrasClave: ['chocolate', 'galleta', 'snack', 'dulce', 'jugo', 'agua', 'refresco', 'bebida'] },
     ];
-
+  
     const categoriaEncontrada = categoriasRelacionadas.find(categoria =>
       categoria.nombre.toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
       categoria.palabrasClave.some(palabra => palabra.toLowerCase().includes(terminoBusqueda.toLowerCase()))
     );
-
+  
     if (categoriaEncontrada) {
       navigate(`/mostrarTodo/${categoriaEncontrada.id}`);
     } else {
       navigate(`/mostrarTodo/No Encontrado`);
     }
-    
   };
+  
 
   const manejarNavegacionPedidos = () => {
     if (usuario) {

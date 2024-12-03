@@ -6,75 +6,53 @@ import Footer from '../components/Footer';
 
 const VerTodosPage = () => {
   const { categoriaId } = useParams();
-  const [productosFiltrados, setProductosFiltrados] = useState([]);
+  const [productos, setProductos] = useState([]);
   const [orden, setOrden] = useState('');
   const [rangoPrecio, setRangoPrecio] = useState([0, 100]);
   const [dropdownAbierto, setDropdownAbierto] = useState(false);
-
-  const productos = [
-    { id: 1, nombre: 'Manzanas Frescas', precio: 5.50, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/limon.webp`, categoria: 'Frutas y Verduras' },
-    { id: 2, nombre: 'Pechuga de Pollo', precio: 15.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/pechuga.jpg`, categoria: 'Carnes y Aves' },
-    { id: 3, nombre: 'Leche Entera GLORIA', precio: 3.80, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/leche.jpg`, categoria: 'Lácteos y Huevos' },
-    { id: 4, nombre: 'Jugo de Naranja', precio: 7.20, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/naranja.jpg`, categoria: 'Bebidas' },
-    { id: 5, nombre: 'Chocolates Sublime', precio: 2.50, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/sublime.jpg`, categoria: 'Snacks y Dulces' },
-    
-
-    { id: 6, nombre: 'Tomates Orgánicos', precio: 4.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/limon.webp`, categoria: 'Frutas y Verduras' },
-    { id: 7, nombre: 'Filete de Res', precio: 25.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/pechuga.jpg`, categoria: 'Carnes y Aves' },
-    { id: 8, nombre: 'Yogurt Natural', precio: 6.50, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/leche.jpg`, categoria: 'Lácteos y Huevos' },
-    { id: 9, nombre: 'Agua Mineral', precio: 1.50, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/naranja.jpg`, categoria: 'Bebidas' },
-    { id: 10, nombre: 'Galletas Integrales', precio: 3.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/sublime.jpg`, categoria: 'Snacks y Dulces' },
-    
-
-    { id: 11, nombre: 'Zanahorias Frescas', precio: 3.20, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/limon.webp`, categoria: 'Frutas y Verduras' },
-    { id: 12, nombre: 'Costillas de Cerdo', precio: 22.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/pechuga.jpg`, categoria: 'Carnes y Aves' },
-    { id: 13, nombre: 'Queso Fresco', precio: 8.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/leche.jpg`, categoria: 'Lácteos y Huevos' },
-    { id: 14, nombre: 'Cerveza Artesanal', precio: 12.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/naranja.jpg`, categoria: 'Bebidas' },
-    { id: 15, nombre: 'Barra de Granola', precio: 2.20, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/sublime.jpg`, categoria: 'Snacks y Dulces' },
-
-
-    { id: 16, nombre: 'Zanahorias nada', precio: 3.20, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/limon.webp`, categoria: 'Frutas y Verduras' },
-    { id: 17, nombre: 'Costillas de nada', precio: 22.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/pechuga.jpg`, categoria: 'Carnes y Aves' },
-    { id: 18, nombre: 'Queso nada', precio: 8.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/leche.jpg`, categoria: 'Lácteos y Huevos' },
-    { id: 19, nombre: 'Cerveza nada', precio: 12.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/naranja.jpg`, categoria: 'Bebidas' },
-    { id: 20, nombre: 'Barra de nada', precio: 2.20, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/sublime.jpg`, categoria: 'Snacks y Dulces' },
-
-    
-    { id: 21, nombre: 'Zanahorias nada', precio: 3.20, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/limon.webp`, categoria: 'Frutas y Verduras' },
-    { id: 22, nombre: 'Costillas de nada', precio: 22.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/pechuga.jpg`, categoria: 'Carnes y Aves' },
-    { id: 23, nombre: 'Queso nada', precio: 8.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/leche.jpg`, categoria: 'Lácteos y Huevos' },
-    { id: 24, nombre: 'Cerveza nada', precio: 12.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/naranja.jpg`, categoria: 'Bebidas' },
-    { id: 25, nombre: 'Barra de nada', precio: 2.20, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/sublime.jpg`, categoria: 'Snacks y Dulces' },
-
-    
-    { id: 26, nombre: 'Zanahorias nada', precio: 3.20, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/limon.webp`, categoria: 'Frutas y Verduras' },
-    { id: 27, nombre: 'Costillas de nada', precio: 22.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/pechuga.jpg`, categoria: 'Carnes y Aves' },
-    { id: 28, nombre: 'Queso nada', precio: 8.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/leche.jpg`, categoria: 'Lácteos y Huevos' },
-    { id: 29, nombre: 'Cerveza nada', precio: 12.00, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/naranja.jpg`, categoria: 'Bebidas' },
-    { id: 30, nombre: 'Barra de nada', precio: 2.20, imagen: `${process.env.PUBLIC_URL}/imagenes/productos/sublime.jpg`, categoria: 'Snacks y Dulces' }
-  ];
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const productosFiltradosPorCategoria = productos.filter(
-      producto => producto.categoria.toLowerCase() === categoriaId.toLowerCase()
-    );
-    const productosRangoFiltrados = productosFiltradosPorCategoria.filter(
+    if (!categoriaId) return;
+
+    const fetchProductos = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`http://localhost:3000/productos/categoria/${categoriaId}`);
+        if (!response.ok) {
+          throw new Error(`Error al obtener productos: ${response.statusText}`);
+        }
+        const data = await response.json();
+        setProductos(data);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductos();
+  }, [categoriaId]);
+
+  const aplicarFiltrosYOrden = () => {
+    let productosFiltrados = productos.filter(
       producto => producto.precio >= rangoPrecio[0] && producto.precio <= rangoPrecio[1]
     );
 
-    let productosOrdenados = [...productosRangoFiltrados];
     if (orden === 'Nombre Ascendente') {
-      productosOrdenados.sort((a, b) => a.nombre.localeCompare(b.nombre));
+      productosFiltrados.sort((a, b) => a.nombre.localeCompare(b.nombre));
     } else if (orden === 'Nombre Descendente') {
-      productosOrdenados.sort((a, b) => b.nombre.localeCompare(a.nombre));
+      productosFiltrados.sort((a, b) => b.nombre.localeCompare(a.nombre));
     } else if (orden === 'Precio Ascendente') {
-      productosOrdenados.sort((a, b) => a.precio - b.precio);
+      productosFiltrados.sort((a, b) => a.precio - b.precio);
     } else if (orden === 'Precio Descendente') {
-      productosOrdenados.sort((a, b) => b.precio - a.precio);
+      productosFiltrados.sort((a, b) => b.precio - a.precio);
     }
 
-    setProductosFiltrados(productosOrdenados);
-  }, [categoriaId, orden, rangoPrecio]);
+    return productosFiltrados;
+  };
 
   const toggleDropdown = () => {
     setDropdownAbierto(!dropdownAbierto);
@@ -85,7 +63,12 @@ const VerTodosPage = () => {
     setDropdownAbierto(false);
   };
 
-  return <>
+  if (loading) return <p>Cargando productos...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  const productosFiltradosYOrdenados = aplicarFiltrosYOrden();
+
+  return (
     <>
       <Header />
       <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', padding: '20px', minHeight: '80vh' }}>
@@ -163,10 +146,9 @@ const VerTodosPage = () => {
           </div>
         </div>
         <div style={{ flex: '3', maxWidth: '800px' }}>
-          <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>{categoriaId}</h2>
-          {productosFiltrados.length > 0 ? (
+          {productosFiltradosYOrdenados.length > 0 ? (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
-              {productosFiltrados.map(producto => (
+              {productosFiltradosYOrdenados.map(producto => (
                 <ProductoResumido key={producto.id} producto={producto} />
               ))}
             </div>
@@ -177,7 +159,7 @@ const VerTodosPage = () => {
       </div>
       <Footer />
     </>
-  </>
+  );
 };
 
 export default VerTodosPage;

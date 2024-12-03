@@ -1,18 +1,5 @@
 import React, { useState } from 'react';
-import CategoriasBar from './CategoriaBar';
-import CategoriasMenu from './CategoriaMenu'; 
-
 const Categorias = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-
-  const categorias = ['Frutas y Verduras', 'Carnes y Aves', 'Lácteos y Huevos', 'Bebidas', 'Snacks y Dulces'];
-
-
-  const toggleOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
   return <>
     <div
       style={{
@@ -22,14 +9,9 @@ const Categorias = () => {
         width: '100%',
         position: 'relative',
       }}
-    >
-
-      <CategoriasBar toggleOpen={toggleOpen} />
-
-
-      {isOpen && <CategoriasMenu categorias={categorias} />}
-    </div>
-    </>
+    ></div>
+      
+      </>
 };
 
 export default Categorias;

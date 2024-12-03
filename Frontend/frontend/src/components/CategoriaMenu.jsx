@@ -5,7 +5,7 @@ const CategoriasMenu = ({ categorias }) => {
   const navigate = useNavigate();
 
   const manejarClickCategoria = (categoria) => {
-    navigate(`/mostrarTodo/${encodeURIComponent(categoria)}`);
+    navigate(`/mostrarTodo/${categoria}`);
   };
 
   return <>
