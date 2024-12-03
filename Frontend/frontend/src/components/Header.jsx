@@ -15,11 +15,11 @@ const Header = () => {
     if (terminoBusqueda.trim() === '') return;
 
     const categoriasRelacionadas = [
-      { id: 'Frutas y Verduras', nombre: 'Frutas y Verduras', palabrasClave: ['manzana', 'banana', 'tomate', 'verdura', 'fruta'] },
-      { id: 'Carnes y Aves', nombre: 'Carnes y Aves', palabrasClave: ['pollo', 'res', 'carne', 'ave', 'cerdo'] },
-      { id: 'Lácteos y Huevos', nombre: 'Lácteos y Huevos', palabrasClave: ['leche', 'yogurt', 'queso', 'huevo'] },
-      { id: 'Bebidas', nombre: 'Bebidas', palabrasClave: ['jugo', 'agua', 'refresco', 'bebida'] },
-      { id: 'Snacks y Dulces', nombre: 'Snacks y Dulces', palabrasClave: ['chocolate', 'galleta', 'snack', 'dulce'] },
+      { nombre: 'Frutas y Verduras', palabrasClave: ['manzana', 'banana', 'tomate', 'verdura', 'fruta'] },
+      { nombre: 'Carnes y Aves', palabrasClave: ['pollo', 'res', 'carne', 'ave', 'cerdo'] },
+      { nombre: 'Lácteos y Huevos', palabrasClave: ['leche', 'yogurt', 'queso', 'huevo'] },
+      { nombre: 'Bebidas', palabrasClave: ['jugo', 'agua', 'refresco', 'bebida'] },
+      { nombre: 'Snacks y Dulces', palabrasClave: ['chocolate', 'galleta', 'snack', 'dulce'] },
     ];
 
     const categoriaEncontrada = categoriasRelacionadas.find(categoria =>
@@ -28,10 +28,11 @@ const Header = () => {
     );
 
     if (categoriaEncontrada) {
-      navigate(`/mostrarTodo/${encodeURIComponent(categoriaEncontrada.id)}`);
+      navigate(`/mostrarTodo/${categoriaEncontrada.id}`);
     } else {
-      navigate(`/mostrarTodo/${encodeURIComponent('No Encontrado')}`);
+      navigate(`/mostrarTodo/No Encontrado`);
     }
+    
   };
 
   const manejarNavegacionPedidos = () => {

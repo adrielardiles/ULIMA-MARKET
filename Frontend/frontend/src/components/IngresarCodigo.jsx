@@ -6,12 +6,15 @@ const IngresarCodigo = ({ manejarCodigoIngresado, reenviarCodigo, manejarCodigoG
     const [email, setEmail] = useState("");
     const [codigo, setCodigo] = useState("");
     const [correoConfirmado, setCorreoConfirmado] = useState(false);
+    const [mensaje, setMensaje] = useState("");
+    const [mensajeTipo, setMensajeTipo] = useState(""); // success o error
 
     const handleEnviarCodigo = async () => {
         if (email) {
             const esCorreoValido = (correo) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
             if (!esCorreoValido(email)) {
-                alert("Por favor, ingresa un correo electrónico válido.");
+                setMensaje("Por favor, ingresa un correo electrónico válido.");
+                setMensajeTipo("error");
                 return;
             }
 
@@ -24,10 +27,10 @@ const IngresarCodigo = ({ manejarCodigoIngresado, reenviarCodigo, manejarCodigoG
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    alert(errorData.error || "El correo no está registrado.");
+                    setMensaje(errorData.error || "El correo no está registrado.");
+                    setMensajeTipo("error");
                     return;
                 }
-
 
                 const codigoGenerado = Math.floor(1000 + Math.random() * 9000).toString();
                 manejarCodigoGenerado(codigoGenerado, email);
@@ -49,15 +52,18 @@ const IngresarCodigo = ({ manejarCodigoIngresado, reenviarCodigo, manejarCodigoG
                 );
 
                 console.log("Correo enviado exitosamente:", emailResponse);
-                alert(`Te hemos enviado un código al correo: ${email}`);
+                setMensaje(`Te hemos enviado un código al correo: ${email}`);
+                setMensajeTipo("success");
                 setCorreoConfirmado(true);
                 reenviarCodigo();
             } catch (error) {
                 console.error("Error al verificar el correo o enviar el código:", error);
-                alert("Hubo un problema al verificar el correo o enviar el código.");
+                setMensaje("Hubo un problema al verificar el correo o enviar el código.");
+                setMensajeTipo("error");
             }
         } else {
-            alert("Por favor, ingresa un correo electrónico válido.");
+            setMensaje("Por favor, ingresa un correo electrónico válido.");
+            setMensajeTipo("error");
         }
     };
 
@@ -68,6 +74,13 @@ const IngresarCodigo = ({ manejarCodigoIngresado, reenviarCodigo, manejarCodigoG
     return (
         <div>
             <h1 className="text-center mb-4">Recuperar Contraseña</h1>
+
+            {mensaje && (
+                <p className={`text-center ${mensajeTipo === "error" ? "text-danger" : "text-success"}`}>
+                    {mensaje}
+                </p>
+            )}
+
             {!correoConfirmado ? (
                 <>
                     <EntradaDatos
